@@ -1,0 +1,21 @@
+{
+
+    "description": "Cross Browser Extension to manage your tabs",
+    "manifest_version": 2,
+    "name": "TabuRei",
+    "version": "1.0",
+    "homepage_url": "https://github.com/daemon1024/TabuRei",
+    "icons": {
+      "48": "icons/taburei.png"
+    },
+  
+    "permissions": [
+      "tabs"
+    ],
+  
+    "browser_action": {
+      "default_icon": "icons/taburei.png",
+      "default_title": "Taburei",
+      "default_popup": "index.html"
+    }  
+  }
