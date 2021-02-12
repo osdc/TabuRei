@@ -4,8 +4,12 @@
     <meta charset="UTF-8" />
   </head>
   <body>
-      <h1>Tab List</h1>
-      <ul id="tabs-list"></ul>
-      <script src="tabs.js"></script>
+    <h1>Tab List</h1>
+    <ul id="tabs-list"></ul>
+
+    <!-- This polyfill allows the Promise-based WebExtension API to run on Chrome and derivatives.   -->
+    <script src="browser-polyfill.min.js"></script>
+
+    <script src="tabs.js"></script>
   </body>
 </html>
