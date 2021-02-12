@@ -1,0 +1,9 @@
+html {
+  min-width: 360px;
+}
+
+.heading {
+  color: blueviolet;
+  font-size: 2em;
+  font-weight: bold;
+}
