@@ -15,24 +15,42 @@ function displayGroupList() {
     for (let prop in store) {
       let groupElement = document.createElement("ul");
 
-      store[prop].forEach((tab) => {
+      store[prop].forEach((tab, i) => {
         let tabElement = document.createElement("li");
         let tabLink = document.createElement("a");
         tabLink.href = tab.url;
         tabLink.innerText = tab.title;
         tabElement.appendChild(tabLink);
+        let deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = "delete ";
+        tabElement.appendChild(deleteBtn);
+
+        deleteBtn.addEventListener("click", () => {
+          tabElement.parentNode.removeChild(tabElement);
+          delete store[prop][i];
+          return browser.storage.local.set({ [prop]: store[prop] });
+        });
+
         groupElement.appendChild(tabElement);
       });
 
-      groupList.appendChild(groupElement);
-
       let restoreBtn = document.createElement("button");
-      restoreBtn.innerHTML = "Restore" + prop;
+      restoreBtn.innerHTML = "Restore " + prop;
       groupList.appendChild(restoreBtn);
 
       restoreBtn.addEventListener("click", () => {
         restore(store[prop]);
       });
+
+      let deleteBtn = document.createElement("button");
+      deleteBtn.innerHTML = "delete " + prop;
+      groupList.appendChild(deleteBtn);
+
+      deleteBtn.addEventListener("click", () =>
+        browser.storage.local.remove(prop).then(window.location.reload())
+      );
+
+      groupList.appendChild(groupElement);
     }
   });
 }

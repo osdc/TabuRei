@@ -64,3 +64,10 @@ document.getElementById("collapse").addEventListener("click", function () {
     tabsList.appendChild(currentTabs);
   });
 });
+
+document.getElementById("tab-manager").addEventListener("click", function () {
+  let creating = browser.tabs.create({
+    url: "index.html",
+  });
+  Promise.resolve(creating);
+});
