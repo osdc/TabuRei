@@ -28,11 +28,21 @@ function storeTabs(tabs) {
     url: tab.url,
   }));
 
-  store = {
-    storedTabs,
-  };
+  let n;
+  browser.storage.local.get(null).then(store => {
+    n = Object.keys(store).length;
+    return n
+  }).then(len => {
+    let groupId = len + 1;
+    console.log(groupId);
 
-  return browser.storage.local.set(store);
+    store = {
+      [groupId]: storedTabs,
+    };
+
+    return browser.storage.local.set(store);
+  });
+
 }
 
 document.addEventListener("DOMContentLoaded", listTabs);
