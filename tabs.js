@@ -60,6 +60,7 @@ document.getElementById("remove").addEventListener("click", function () {
 
     tabsList.appendChild(currentTabs);
   });
+});
 
 const saveBtn = document.querySelector(".saveBtn");
 saveBtn.addEventListener("click", () => {
