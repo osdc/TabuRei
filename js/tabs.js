@@ -28,49 +28,41 @@ function storeTabs(tabs) {
     url: tab.url,
   }));
 
-  store = {
-    storedTabs,
-  };
+  let n;
+  browser.storage.local.get(null).then(store => {
+    n = Object.keys(store).length;
+    return n
+  }).then(len => {
+    let groupId = len + 1;
+    console.log(groupId);
 
-  return browser.storage.local.set(store);
+    store = {
+      [groupId]: storedTabs,
+    };
+
+    return browser.storage.local.set(store);
+  });
+
 }
 
 document.addEventListener("DOMContentLoaded", listTabs);
-document.getElementById("remove").addEventListener("click", function () {
+document.getElementById("collapse").addEventListener("click", function () {
   getCurrentWindowTabs().then((tabs) => {
-    function onSuccess() {
-      console.log(`Success`);
-    }
 
-    function onError(error) {
-      console.log(`Error: ${error}`);
-    }
+    let storing = storeTabs(tabs);
+    Promise.resolve(storing);
 
-    var creating = browser.tabs.create({
+    let creating = browser.tabs.create({
       url: "index.html",
     });
 
-    creating.then(onSuccess, onError);
+    Promise.resolve(creating);
 
     for (let tab of tabs) {
-      var removing = browser.tabs.remove(tab.id);
-      removing.then(onSuccess, onError);
+      let removing = browser.tabs.remove(tab.id);
+      Promise.resolve(removing);
     }
 
     tabsList.appendChild(currentTabs);
   });
-});
-
-const saveBtn = document.querySelector(".saveBtn");
-saveBtn.addEventListener("click", () => {
-  getCurrentWindowTabs()
-    .then((tabs) => {
-      return storeTabs(tabs);
-    })
-    .then(() => {
-      return browser.storage.local.get(store);
-    })
-    .then((result) => {
-      result.storedTabs.forEach((value) => console.log(value));
-    });
 });
