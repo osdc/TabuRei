@@ -1,4 +1,3 @@
-let tabList = [];
 let store;
 
 function getCurrentWindowTabs() {

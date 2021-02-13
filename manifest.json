@@ -5,14 +5,14 @@
   "version": "1.0",
   "homepage_url": "https://github.com/daemon1024/TabuRei",
   "icons": {
-    "48": "src/icons/taburei.png"
+    "48": "icons/taburei.png"
   },
 
   "permissions": ["tabs", "storage"],
 
   "browser_action": {
-    "default_icon": "src/icons/taburei.png",
+    "default_icon": "icons/taburei.png",
     "default_title": "Taburei",
-    "default_popup": "src/popup.html"
+    "default_popup": "popup.html"
   }
 }
