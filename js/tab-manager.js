@@ -37,7 +37,7 @@ function displayGroupList() {
       });
 
       let restoreBtn = document.createElement("button");
-      restoreBtn.innerHTML = "Restore " + prop;
+      restoreBtn.innerHTML = "Restore";
       groupList.appendChild(restoreBtn);
 
       restoreBtn.addEventListener("click", () => {
@@ -45,7 +45,7 @@ function displayGroupList() {
       });
 
       let deleteBtn = document.createElement("button");
-      deleteBtn.innerHTML = "delete " + prop;
+      deleteBtn.innerHTML = "Delete";
       groupList.appendChild(deleteBtn);
 
       deleteBtn.addEventListener("click", () =>
