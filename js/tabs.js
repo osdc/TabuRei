@@ -1,5 +1,3 @@
-let store;
-
 function getCurrentWindowTabs() {
   return browser.tabs.query({ currentWindow: true });
 }
@@ -26,29 +24,29 @@ function storeTabs(tabs) {
     id: tab.id,
     title: tab.title,
     url: tab.url,
+    cookieStoreId: tab.cookieStoreId,
   }));
 
   let n;
-  browser.storage.local.get(null).then(store => {
-    n = Object.keys(store).length;
-    return n
-  }).then(len => {
-    let groupId = len + 1;
-    console.log(groupId);
+  browser.storage.local
+    .get(null)
+    .then((store) => {
+      n = Object.keys(store).length;
+      return n;
+    })
+    .then((len) => {
+      let groupId = len + 1;
+      let store = {
+        [groupId]: storedTabs,
+      };
 
-    store = {
-      [groupId]: storedTabs,
-    };
-
-    return browser.storage.local.set(store);
-  });
-
+      return browser.storage.local.set(store);
+    });
 }
 
 document.addEventListener("DOMContentLoaded", listTabs);
 document.getElementById("collapse").addEventListener("click", function () {
   getCurrentWindowTabs().then((tabs) => {
-
     let storing = storeTabs(tabs);
     Promise.resolve(storing);
 
