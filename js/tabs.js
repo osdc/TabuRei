@@ -19,6 +19,18 @@ function listTabs() {
   });
 }
 
+
+function generate_UUID(){
+    var dt = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+}
+
+
 function storeTabs(tabs) {
   const storedTabs = tabs.map((tab) => ({
     id: tab.id,
@@ -27,22 +39,14 @@ function storeTabs(tabs) {
     cookieStoreId: tab.cookieStoreId,
   }));
 
-  let n;
-  browser.storage.local
-    .get(null)
-    .then((store) => {
-      n = Object.keys(store).length;
-      return n;
-    })
-    .then((len) => {
-      let groupId = len + 1;
-      let store = {
-        [groupId]: storedTabs,
-      };
+  let groupId = generate_UUID()
 
-      return browser.storage.local.set(store);
-    });
-}
+  let store = {
+    [groupId]: storedTabs,
+  };
+
+  return browser.storage.local.set(store);
+};
 
 document.addEventListener("DOMContentLoaded", listTabs);
 document.getElementById("collapse").addEventListener("click", function () {

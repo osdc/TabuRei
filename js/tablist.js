@@ -1,13 +1,15 @@
-function restore(groupList) {
-  for (var i = 0; i < groupList.length; i++) {
+function restore(group) {
+  group.map(tab => {
+
     var creating = browser.tabs.create({
-      url: groupList[i].url,
-      cookieStoreId: groupList[i].cookieStoreId,
+      url: tab.url,
+      cookieStoreId: tab.cookieStoreId,
     });
 
     Promise.resolve(creating);
-  }
+  })
 }
+
 
 function displayGroupList() {
   let groupList = document.getElementById("group-list");
