@@ -19,17 +19,18 @@ function listTabs() {
   });
 }
 
-
-function generate_UUID(){
-    var dt = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (dt + Math.random()*16)%16 | 0;
-        dt = Math.floor(dt/16);
-        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
-    });
-    return uuid;
+function generate_UUID() {
+  var dt = new Date().getTime();
+  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+    /[xy]/g,
+    function (c) {
+      var r = (dt + Math.random() * 16) % 16 | 0;
+      dt = Math.floor(dt / 16);
+      return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
+    }
+  );
+  return uuid;
 }
-
 
 function storeTabs(tabs) {
   const storedTabs = tabs.map((tab) => ({
@@ -39,14 +40,14 @@ function storeTabs(tabs) {
     cookieStoreId: tab.cookieStoreId,
   }));
 
-  let groupId = generate_UUID()
+  let groupId = generate_UUID();
 
   let store = {
     [groupId]: storedTabs,
   };
 
   return browser.storage.local.set(store);
-};
+}
 
 document.addEventListener("DOMContentLoaded", listTabs);
 document.getElementById("collapse").addEventListener("click", function () {
@@ -64,8 +65,6 @@ document.getElementById("collapse").addEventListener("click", function () {
       let removing = browser.tabs.remove(tab.id);
       Promise.resolve(removing);
     }
-
-    tabsList.appendChild(currentTabs);
   });
 });
 
