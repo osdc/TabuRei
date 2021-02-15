@@ -29,7 +29,7 @@ function displayGroupList() {
 
         deleteBtn.addEventListener("click", () => {
           tabElement.parentNode.removeChild(tabElement);
-          delete store[prop][i];
+          store[prop].splice(i, 1);
           return browser.storage.local.set({ [prop]: store[prop] });
         });
 
