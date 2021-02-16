@@ -22,6 +22,7 @@ function displayGroupList() {
         let tabLink = document.createElement("a");
         tabLink.href = tab.url;
         tabLink.innerText = tab.title;
+        tabLink.setAttribute("target", "__blank");
         tabElement.appendChild(tabLink);
         let deleteBtn = document.createElement("button");
         deleteBtn.innerHTML = "delete ";
