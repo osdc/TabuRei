@@ -7,12 +7,14 @@ function listTabs() {
     let tabsList = document.getElementById("tabs-list");
     let currentTabs = document.createDocumentFragment();
     for (let tab of tabs) {
-      let tabElement = document.createElement("li");
-      let tabLink = document.createElement("a");
-      tabLink.href = tab.url;
-      tabLink.innerText = tab.title;
-      tabElement.appendChild(tabLink);
-      currentTabs.appendChild(tabElement);
+      if (!tab.url.startsWith("about")) {
+        let tabElement = document.createElement("li");
+        let tabLink = document.createElement("a");
+        tabLink.href = tab.url;
+        tabLink.innerText = tab.title;
+        tabElement.appendChild(tabLink);
+        currentTabs.appendChild(tabElement);
+      }
     }
 
     tabsList.appendChild(currentTabs);
@@ -33,7 +35,9 @@ function generate_UUID() {
 }
 
 function storeTabs(tabs) {
-  const storedTabs = tabs.map((tab) => ({
+  const validTabs = tabs.filter((tab) => !tab.url.startsWith("about"));
+
+  const storedTabs = validTabs.map((tab) => ({
     id: tab.id,
     title: tab.title,
     url: tab.url,
