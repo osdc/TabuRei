@@ -1,13 +1,11 @@
 function restore(group) {
-  group.map(({ url, cookieStoreId }) => {
+  group.forEach(({ url, cookieStoreId }) => {
     let tab = {};
     tab.url = url;
     if (cookieStoreId) {
       tab.cookieStoreId = cookieStoreId;
     }
-    var creating = browser.tabs.create(tab);
-
-    Promise.resolve(creating);
+    browser.tabs.create(tab).catch((err) => console.debug(err));
   });
 }
 
