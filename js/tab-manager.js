@@ -1,5 +1,4 @@
 function restore(group) {
-  console.log(group);
   group.forEach((tab) => {
     let allowedProperties = [
       "url",
