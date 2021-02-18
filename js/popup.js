@@ -37,12 +37,7 @@ function generate_UUID() {
 function storeTabs(tabs) {
   const validTabs = tabs.filter((tab) => !tab.url.startsWith("about:"));
 
-  const storedTabs = validTabs.map((tab) => ({
-    id: tab.id,
-    title: tab.title,
-    url: tab.url,
-    cookieStoreId: tab.cookieStoreId,
-  }));
+  const storedTabs = validTabs.map((tab) => (tab ));
 
   let groupId = generate_UUID();
 
