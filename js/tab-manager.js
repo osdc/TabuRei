@@ -15,9 +15,6 @@ function restore(group) {
         return obj;
       }, {});
 
-    console.log(createdTab);
-    console.log({ url: tab.url });
-
     browser.tabs.create(createdTab).catch((err) => console.debug(err));
   });
 }
