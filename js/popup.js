@@ -7,7 +7,7 @@ function listTabs() {
     let tabsList = document.getElementById("tabs-list");
     let currentTabs = document.createDocumentFragment();
     for (let tab of tabs) {
-      if (!tab.url.startsWith("about")) {
+      if (!tab.url.startsWith("about:")) {
         let tabElement = document.createElement("li");
         let tabLink = document.createElement("a");
         tabLink.href = tab.url;
@@ -35,7 +35,7 @@ function generate_UUID() {
 }
 
 function storeTabs(tabs) {
-  const validTabs = tabs.filter((tab) => !tab.url.startsWith("about"));
+  const validTabs = tabs.filter((tab) => !tab.url.startsWith("about:"));
 
   const storedTabs = validTabs.map((tab) => ({
     id: tab.id,
