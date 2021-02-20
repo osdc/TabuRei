@@ -1,11 +1,6 @@
 function restore(group) {
-  group.forEach(({ url, cookieStoreId }) => {
-    let tab = {};
-    tab.url = url;
-    if (cookieStoreId) {
-      tab.cookieStoreId = cookieStoreId;
-    }
-    browser.tabs.create(tab).catch((err) => console.debug(err));
+  group.forEach((tab) => {
+    browser.tabs.create(tab.create).catch((err) => console.debug(err));
   });
 }
 

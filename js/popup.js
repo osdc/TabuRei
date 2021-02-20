@@ -37,12 +37,26 @@ function generate_UUID() {
 function storeTabs(tabs) {
   const validTabs = tabs.filter((tab) => !tab.url.startsWith("about:"));
 
-  const storedTabs = validTabs.map((tab) => ({
-    id: tab.id,
-    title: tab.title,
-    url: tab.url,
-    cookieStoreId: tab.cookieStoreId,
-  }));
+  let allowedProperties = [
+    "url",
+    "cookieStoreId",
+    "openInReaderMode",
+    "pinned",
+  ];
+
+  const storedTabs = validTabs.map((tab) => {
+    return {
+      url: tab.url,
+      id: tab.id,
+      title: tab.title,
+      create: Object.keys(tab)
+        .filter((key) => allowedProperties.includes(key))
+        .reduce((obj, key) => {
+          obj[key] = tab[key];
+          return obj;
+        }, {}),
+    };
+  });
 
   let groupId = generate_UUID();
 
