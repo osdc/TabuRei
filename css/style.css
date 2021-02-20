@@ -1,9 +1,41 @@
 html {
   min-width: 360px;
+  font-family: sans-serif;
 }
 
+body {
+  background-color: #232931;
+  color: #eeeeee;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+
 .heading {
-  color: blueviolet;
+  color: #21e6c1;
   font-size: 2em;
   font-weight: bold;
+}
+
+button {
+  background-color: blue;
+  font-family: monospace;
+  font-weight: bolder;
+  color: #eeee;
+}
+
+.restore-btn {
+
+}
+
+button.delete {
+  background-color: #de193e;
+}
+
+button.restore {
+  background-color: #21e6c1;
+  color: #121212; !important
 }

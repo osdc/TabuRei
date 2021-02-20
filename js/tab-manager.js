@@ -32,6 +32,7 @@ function displayGroupList() {
       });
 
       let restoreBtn = document.createElement("button");
+      restoreBtn.className = "restore";
       restoreBtn.innerHTML = "Restore";
       groupList.appendChild(restoreBtn);
 
@@ -40,6 +41,7 @@ function displayGroupList() {
       });
 
       let deleteBtn = document.createElement("button");
+      deleteBtn.className = "delete"
       deleteBtn.innerHTML = "Delete";
       groupList.appendChild(deleteBtn);
 
