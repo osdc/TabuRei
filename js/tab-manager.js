@@ -9,7 +9,10 @@ function displayGroupList() {
   browser.storage.local.get(null).then((store) => {
     let props = Object.keys(store).reverse();
     props.forEach((prop) => {
-      let groupElement = document.createElement("ul");
+      let groupElement = document.createElement("div");
+      groupElement.className = "tab-group";
+
+      let list = document.createElement("ul");
 
       store[prop].forEach((tab, i) => {
         let tabElement = document.createElement("li");
@@ -33,13 +36,16 @@ function displayGroupList() {
           return browser.storage.local.set({ [prop]: store[prop] });
         });
 
-        groupElement.appendChild(tabElement);
+        list.appendChild(tabElement);
       });
+
+      let header = document.createElement("div");
+      header.className = "header";
 
       let restoreBtn = document.createElement("button");
       restoreBtn.className = "restore";
       restoreBtn.innerHTML = "Restore";
-      groupList.appendChild(restoreBtn);
+      header.appendChild(restoreBtn);
 
       restoreBtn.addEventListener("click", () => {
         restore(store[prop]);
@@ -48,13 +54,15 @@ function displayGroupList() {
       let deleteBtn = document.createElement("button");
       deleteBtn.className = "delete";
       deleteBtn.innerHTML = "Delete";
-      groupList.appendChild(deleteBtn);
+      header.appendChild(deleteBtn);
 
       deleteBtn.addEventListener("click", () => {
         confirm("Are you sure you want to delete this group?") &&
           browser.storage.local.remove(prop).then(window.location.reload());
       });
 
+      groupElement.appendChild(header);
+      groupElement.appendChild(list);
       groupList.appendChild(groupElement);
     });
   });
