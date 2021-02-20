@@ -43,9 +43,9 @@ function displayGroupList() {
       deleteBtn.innerHTML = "Delete";
       groupList.appendChild(deleteBtn);
 
-      deleteBtn.addEventListener("click", () =>
-        browser.storage.local.remove(prop).then(window.location.reload())
-      );
+      deleteBtn.addEventListener("click", () => {
+        confirm("Are you sure you want to delete this group?") && browser.storage.local.remove(prop).then(window.location.reload());
+      });
 
       groupList.appendChild(groupElement);
     });
@@ -55,5 +55,5 @@ function displayGroupList() {
 document.addEventListener("DOMContentLoaded", displayGroupList);
 
 document.getElementById("clear-storage-btn").addEventListener("click", () => {
-  browser.storage.local.clear().then(window.location.reload());
+  confirm("Yo homie ya ight?") && browser.storage.local.clear().then(window.location.reload());
 });
