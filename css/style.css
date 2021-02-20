@@ -31,9 +31,9 @@ a {
 }
 
 button {
-  background-color: blue;
+  background-color: #21e6c1;
   font-weight: bolder;
-  color: #eeee;
+  color: #121212;
   border-color: #121212;
   padding: 5px 10px;
   text-align: center;
@@ -57,6 +57,16 @@ ul {
   list-style: none;
   align-self: center;
   width: 90%;
+}
+
+li {
+  display: inline-block;
+  width: 90%;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
 }
 
 button.list-item {
@@ -95,7 +105,7 @@ li:hover {
   background-color: #393e46;
 }
 
-li:hover button.bullet {
+li:hover button.bullet :not(.popup) {
   display: none;
   color: #de193e;
   list-style: none;
@@ -103,6 +113,10 @@ li:hover button.bullet {
 
 li:hover button.delete-tab {
   display: inline-block;
+}
+
+button.delete-tab:hover ~ a {
+  text-decoration: line-through;
 }
 
 #clear-storage-btn {
