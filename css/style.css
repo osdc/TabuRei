@@ -13,7 +13,6 @@ a {
   color: inherit;
 }
 
-
 .heading {
   color: #21e6c1;
   font-size: 2em;
@@ -22,20 +21,35 @@ a {
 
 button {
   background-color: blue;
-  font-family: monospace;
   font-weight: bolder;
   color: #eeee;
-}
-
-.restore-btn {
-
+  border-color: #121212;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 
 button.delete {
   background-color: #de193e;
 }
 
+button.delete-tab {
+  color: rgba(0, 0, 0, 0);
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  background: none;
+}
+
 button.restore {
   background-color: #21e6c1;
-  color: #121212; !important
+  color: #121212;
+}
+
+li:hover button.delete-tab {
+  color: #de193e;
 }

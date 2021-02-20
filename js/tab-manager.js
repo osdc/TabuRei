@@ -19,7 +19,8 @@ function displayGroupList() {
         tabLink.setAttribute("target", "__blank");
         tabElement.appendChild(tabLink);
         let deleteBtn = document.createElement("button");
-        deleteBtn.innerHTML = "delete ";
+        deleteBtn.className = "delete-tab";
+        deleteBtn.innerHTML = "&#x2717";
         tabElement.appendChild(deleteBtn);
 
         deleteBtn.addEventListener("click", () => {
@@ -41,12 +42,13 @@ function displayGroupList() {
       });
 
       let deleteBtn = document.createElement("button");
-      deleteBtn.className = "delete"
+      deleteBtn.className = "delete";
       deleteBtn.innerHTML = "Delete";
       groupList.appendChild(deleteBtn);
 
       deleteBtn.addEventListener("click", () => {
-        confirm("Are you sure you want to delete this group?") && browser.storage.local.remove(prop).then(window.location.reload());
+        confirm("Are you sure you want to delete this group?") &&
+          browser.storage.local.remove(prop).then(window.location.reload());
       });
 
       groupList.appendChild(groupElement);
@@ -57,5 +59,6 @@ function displayGroupList() {
 document.addEventListener("DOMContentLoaded", displayGroupList);
 
 document.getElementById("clear-storage-btn").addEventListener("click", () => {
-  confirm("Yo homie ya ight?") && browser.storage.local.clear().then(window.location.reload());
+  confirm("Yo homie ya ight?") &&
+    browser.storage.local.clear().then(window.location.reload());
 });
