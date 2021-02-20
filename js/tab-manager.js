@@ -47,9 +47,9 @@ function displayGroupList() {
       deleteBtn.innerHTML = "Delete";
       groupList.appendChild(deleteBtn);
 
-      deleteBtn.addEventListener("click", () =>
-        browser.storage.local.remove(prop).then(window.location.reload())
-      );
+      deleteBtn.addEventListener("click", () => {
+        confirm("Yo homie ya ight?") && browser.storage.local.remove(prop).then(window.location.reload())
+      });
 
       groupList.appendChild(groupElement);
     }
