@@ -1,24 +1,7 @@
 function restore(group) {
   console.log(group);
   group.forEach((tab) => {
-    let allowedProperties = [
-      "url",
-      "cookieStoreId",
-      "openInReaderMode",
-      "pinned",
-    ];
-
-    const createdTab = Object.keys(tab)
-      .filter((key) => allowedProperties.includes(key))
-      .reduce((obj, key) => {
-        obj[key] = tab[key];
-        return obj;
-      }, {});
-
-    console.log(createdTab);
-    console.log({ url: tab.url });
-
-    browser.tabs.create(createdTab).catch((err) => console.debug(err));
+    browser.tabs.create(tab.create).catch((err) => console.debug(err));
   });
 }
 
