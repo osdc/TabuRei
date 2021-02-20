@@ -1,5 +1,4 @@
 function restore(group) {
-  console.log(group);
   group.forEach((tab) => {
     browser.tabs.create(tab.create).catch((err) => console.debug(err));
   });
