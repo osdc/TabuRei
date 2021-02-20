@@ -10,6 +10,41 @@ function displayGroupList() {
     let props = Object.keys(store).reverse();
     props.forEach((prop) => {
       let groupElement = document.createElement("ul");
+      groupElement.setAttribute("prop", prop);
+      let sortable = Sortable.create(groupElement, {
+        group: "shared",
+        animation: 150,
+        onEnd: (e) => {
+          const selectedItem = e.item;
+          console.log(selectedItem);
+          const prop = e.from.getAttribute("prop");
+          const index = selectedItem.getAttribute("id");
+          const propToBe = e.to.getAttribute("prop");
+          const originalStore = store[prop];
+          const updatedStore = store[propToBe];
+          if (propToBe !== prop) {
+            updatedStore.push(originalStore[index]);
+            originalStore.splice(index, 1);
+            if (originalStore.length === 0) {
+              console.log(originalStore);
+              browser.storage.local.set({
+                [propToBe]: updatedStore,
+              });
+              return browser.storage.local
+                .remove(prop)
+                .then(window.location.reload());
+            }
+            console.log({ originalStore, updatedStore });
+            browser.storage.local
+              .set({
+                [prop]: originalStore,
+                [propToBe]: updatedStore,
+              })
+              .then((data) => window.location.reload())
+              .catch((err) => console.log(err));
+          }
+        },
+      });
 
       store[prop].forEach((tab, i) => {
         let tabElement = document.createElement("li");
@@ -18,6 +53,8 @@ function displayGroupList() {
         tabLink.innerText = tab.title;
         tabLink.setAttribute("target", "__blank");
         tabElement.appendChild(tabLink);
+        tabElement.setAttribute("prop", prop);
+        tabElement.setAttribute("id", i);
         let deleteBtn = document.createElement("button");
         deleteBtn.innerHTML = "delete ";
         tabElement.appendChild(deleteBtn);
