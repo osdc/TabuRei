@@ -7,7 +7,8 @@ function restore(group) {
 function displayGroupList() {
   let groupList = document.getElementById("group-list");
   browser.storage.local.get(null).then((store) => {
-    for (let prop in store) {
+    let props = Object.keys(store).reverse();
+    props.forEach((prop) => {
       let groupElement = document.createElement("ul");
 
       store[prop].forEach((tab, i) => {
@@ -47,7 +48,7 @@ function displayGroupList() {
       );
 
       groupList.appendChild(groupElement);
-    }
+    });
   });
 }
 
