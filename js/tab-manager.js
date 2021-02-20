@@ -13,15 +13,19 @@ function displayGroupList() {
 
       store[prop].forEach((tab, i) => {
         let tabElement = document.createElement("li");
+        let deleteBtn = document.createElement("button");
+        deleteBtn.className = "delete-tab list-item";
+        deleteBtn.innerHTML = "&#x2A09";
+        let bulletPoint = document.createElement("button");
+        bulletPoint.className = "bullet list-item";
+        bulletPoint.innerHTML = "&#9726"
+        tabElement.appendChild(deleteBtn);
+        tabElement.appendChild(bulletPoint);
         let tabLink = document.createElement("a");
         tabLink.href = tab.url;
         tabLink.innerText = tab.title;
         tabLink.setAttribute("target", "__blank");
         tabElement.appendChild(tabLink);
-        let deleteBtn = document.createElement("button");
-        deleteBtn.className = "delete-tab";
-        deleteBtn.innerHTML = "&#x2717";
-        tabElement.appendChild(deleteBtn);
 
         deleteBtn.addEventListener("click", () => {
           tabElement.parentNode.removeChild(tabElement);

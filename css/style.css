@@ -37,19 +37,42 @@ button.delete {
   background-color: #de193e;
 }
 
-button.delete-tab {
-  color: rgba(0, 0, 0, 0);
-  border: none;
-  text-decoration: none;
-  display: inline-block;
-  background: none;
-}
-
 button.restore {
   background-color: #21e6c1;
   color: #121212;
 }
 
-li:hover button.delete-tab {
-  color: #de193e;
+ul {
+  list-style: none;
 }
+
+button.list-item {
+  width: 3em;
+  display: inline-block;
+  text-align: center;
+}
+
+button.delete-tab {
+  color: #de193e; 
+  display: none;
+  border: none;
+  text-decoration: none;
+  background: none;
+}
+
+button.bullet {
+  border: none;
+  text-decoration: none;
+  background: none;
+}
+
+li:hover button.bullet {
+  display: none;
+  color: #de193e;
+  list-style: none;
+}
+
+li:hover button.delete-tab {
+  display: inline-block;
+}
+
