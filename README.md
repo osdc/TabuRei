@@ -8,6 +8,12 @@
 
 </div>
 
+## About
+**Pronouced: ta-boo-ray**
+
+TODO
+
+
 ## Why?
 - Fully Open-Source.
 - Minimalistic, Bloat free.
