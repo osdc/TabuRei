@@ -1,5 +1,4 @@
 html {
-  min-width: 360px;
   font-family: sans-serif;
   height: 100%;
   width: 100%;
@@ -8,6 +7,7 @@ html {
 }
 
 body {
+  min-width: 360px;
   background-color: #232931;
   color: #eeeeee;
 }
@@ -69,6 +69,15 @@ li {
   justify-content: center;
 }
 
+button.popup {
+  width: 2em;
+  display: inline-block;
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  background: none;
+}
+
 button.list-item {
   width: 3em;
   display: inline-block;
@@ -105,7 +114,7 @@ li:hover {
   background-color: #393e46;
 }
 
-li:hover button.bullet :not(.popup) {
+li:hover button.bullet {
   display: none;
   color: #de193e;
   list-style: none;

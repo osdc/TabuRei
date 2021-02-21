@@ -10,7 +10,7 @@ function listTabs() {
       if (!tab.url.startsWith("about:")) {
         let tabElement = document.createElement("li");
         let bulletPoint = document.createElement("button");
-        bulletPoint.className = "bullet list-item popup";
+        bulletPoint.className = "popup";
         bulletPoint.innerHTML = "&#9726";
         bulletPoint.disabled = true;
         tabElement.appendChild(bulletPoint);
