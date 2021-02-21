@@ -13,6 +13,35 @@ function displayGroupList() {
       groupElement.className = "tab-group";
 
       let list = document.createElement("ul");
+      list.ondrop = function (e) {
+        e.preventDefault();
+        const data = e.dataTransfer.getData("element-data");
+        const element = document.getElementById(data);
+        list.appendChild(element);
+        const elementProp = element.getAttribute("prop");
+        const index = element.getAttribute("index");
+        const originalStore = store[elementProp];
+        const updatedStore = store[prop];
+        if (elementProp !== prop) {
+          updatedStore.push(originalStore[index]);
+          originalStore.splice(index, 1);
+          if (originalStore.length === 0) {
+            browser.storage.local.set({
+              [prop]: updatedStore,
+            });
+            return browser.storage.local
+              .remove(elementProp)
+              .then(window.location.reload());
+          }
+          browser.storage.local
+            .set({
+              [elementProp]: originalStore,
+              [prop]: updatedStore,
+            })
+            .then((data) => window.location.reload())
+            .catch((err) => console.log(err));
+        }
+      };
 
       store[prop].forEach((tab, i) => {
         let tabElement = document.createElement("li");
@@ -21,14 +50,22 @@ function displayGroupList() {
         deleteBtn.innerHTML = "&#x2A09";
         let bulletPoint = document.createElement("button");
         bulletPoint.className = "bullet list-item";
-        bulletPoint.innerHTML = "&#9726"
+        bulletPoint.innerHTML = "&#9726";
         tabElement.appendChild(deleteBtn);
         tabElement.appendChild(bulletPoint);
+        tabElement.setAttribute("prop", prop);
+        tabElement.setAttribute("index", i);
+        tabElement.id = tab.id;
         let tabLink = document.createElement("a");
         tabLink.href = tab.url;
         tabLink.innerText = tab.title;
         tabLink.setAttribute("target", "__blank");
         tabElement.appendChild(tabLink);
+
+        tabElement.addEventListener("dragstart", (e) => {
+          e.dataTransfer.setData("element-data", tab.id);
+        });
+        tabElement.addEventListener("dragover", (e) => e.preventDefault());
 
         deleteBtn.addEventListener("click", () => {
           tabElement.parentNode.removeChild(tabElement);
