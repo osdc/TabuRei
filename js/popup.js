@@ -9,6 +9,11 @@ function listTabs() {
     for (let tab of tabs) {
       if (!tab.url.startsWith("about:")) {
         let tabElement = document.createElement("li");
+        let bulletPoint = document.createElement("button");
+        bulletPoint.className = "popup";
+        bulletPoint.innerHTML = "&#9726";
+        bulletPoint.disabled = true;
+        tabElement.appendChild(bulletPoint);
         let tabLink = document.createElement("a");
         tabLink.href = tab.url;
         tabLink.innerText = tab.title;

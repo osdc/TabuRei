@@ -3,18 +3,21 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css" />
 
     <title>TabuRei</title>
   </head>
 
   <body>
-    <h1>TabuRei</h1>
+    <div class="container">
+      <h1 class="heading">TabuRei</h1>
 
-    <div id="group-list">
+      <div id="group-list"></div>
 
+      <button id="clear-storage-btn" class="delete">
+        Clear Storage (Warning: This will clear all tabs)
+      </button>
     </div>
-
-    <button id="clear-storage-btn">Clear Storage (Warning: This will clear all tabs)</button>
 
     <!-- This polyfill allows the Promise-based WebExtension API to run on Chrome and derivatives.   -->
     <script src="polyfill/browser-polyfill.min.js"></script>

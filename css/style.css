@@ -1,9 +1,133 @@
 html {
+  font-family: sans-serif;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
   min-width: 360px;
+  background-color: #232931;
+  color: #eeeeee;
+}
+
+.container {
+  max-width: 1000px;
+  width: 100%;
+  margin: auto;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
 }
 
 .heading {
-  color: blueviolet;
-  font-size: 2em;
+  color: #21e6c1;
+  font-size: 2.5em;
   font-weight: bold;
+  text-align: center;
+}
+
+button {
+  background-color: #21e6c1;
+  font-weight: bolder;
+  color: #121212;
+  border-color: #121212;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+button.delete {
+  background-color: #de193e;
+}
+
+button.restore {
+  background-color: #21e6c1;
+  color: #121212;
+}
+
+ul {
+  list-style: none;
+  align-self: center;
+  width: 90%;
+}
+
+li {
+  display: inline-block;
+  width: 90%;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+button.popup {
+  width: 2em;
+  display: inline-block;
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  background: none;
+}
+
+button.list-item {
+  width: 3em;
+  display: inline-block;
+  text-align: center;
+}
+
+button.delete-tab {
+  color: #de193e;
+  display: none;
+  border: none;
+  text-decoration: none;
+  background: none;
+}
+
+button.bullet {
+  border: none;
+  text-decoration: none;
+  background: none;
+}
+
+.tab-group {
+  border: 4px solid #393e46;
+  margin-bottom: 1em;
+  padding: 0.5em;
+}
+
+.tab-group .header {
+  float: inline-end;
+  display: flex;
+  justify-content: space-between;
+}
+
+li:hover {
+  background-color: #393e46;
+}
+
+li:hover button.bullet {
+  display: none;
+  color: #de193e;
+  list-style: none;
+}
+
+li:hover button.delete-tab {
+  display: inline-block;
+}
+
+button.delete-tab:hover ~ a {
+  text-decoration: line-through;
+}
+
+#clear-storage-btn {
+  float: inline-end;
 }
