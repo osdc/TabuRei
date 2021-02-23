@@ -24,7 +24,7 @@ function displayGroupList() {
 
     let list = document.createElement("ul");
 
-    list.ondrop = listonDrop;
+    list.ondrop = (e) => listonDrop(e, prop, list);
 
     store[prop].forEach((tab, i) => {
       let tabElement = document.createElement("li");
@@ -41,13 +41,12 @@ function displayGroupList() {
       bulletPoint.innerHTML = "&#9726";
       tabElement.appendChild(bulletPoint);
 
+      tabElement.setAttribute("draggable", true);
       tabElement.setAttribute("prop", prop);
       tabElement.setAttribute("index", i);
       tabElement.id = tab.id;
-      let tabLink = document.createElement("a");
-      tabLink.href = tab.url;
-      tabLink.innerText = tab.title;
-      tabLink.setAttribute("target", "__blank");
+
+      let tabLink = document.createTextNode(tab.title);
       tabElement.appendChild(tabLink);
 
       tabElement.addEventListener("dragstart", (e) => {
@@ -106,6 +105,14 @@ document.getElementById("group-list").addEventListener("click", (e) => {
       .then(() => window.location.reload())
       .catch((err) => console.log(err));
   }
+
+  if (e.target && e.target.matches("li")) {
+    let prop = e.target.getAttribute("prop");
+    let i = Number(e.target.getAttribute("i"));
+    return browser.tabs
+      .create(store[prop][i].create)
+      .catch((err) => console.debug(err));
+  }
 });
 
 document.getElementById("clear-storage-btn").addEventListener("click", () => {
@@ -113,7 +120,7 @@ document.getElementById("clear-storage-btn").addEventListener("click", () => {
     browser.storage.local.clear().then(window.location.reload());
 });
 
-function listonDrop(e) {
+function listonDrop(e, prop, list) {
   e.preventDefault();
   const data = e.dataTransfer.getData("element-data");
   const element = document.getElementById(data);
