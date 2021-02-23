@@ -49,6 +49,8 @@ function displayGroupList() {
       tabElement.id = tab.id;
 
       let tabLink = document.createElement("span");
+      tabLink.setAttribute("prop", prop);
+      tabLink.setAttribute("index", i);
       tabLink.appendChild(document.createTextNode(tab.title));
       tabElement.appendChild(tabLink);
 
@@ -109,7 +111,7 @@ document.getElementById("group-list").addEventListener("click", (e) => {
       .catch((err) => console.log(err));
   }
 
-  if (e.target && e.target.matches("li")) {
+  if ((e.target && e.target.matches("li")) || e.target.matches("span")) {
     let prop = e.target.getAttribute("prop");
     let i = Number(e.target.getAttribute("i"));
     return browser.tabs
