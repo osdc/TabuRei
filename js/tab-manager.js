@@ -1,94 +1,112 @@
-function restore(group) {
-  group.forEach((tab) => {
+function restore(groupID) {
+  store[groupID].forEach((tab) => {
     browser.tabs.create(tab.create).catch((err) => console.debug(err));
+  });
+}
+
+let store = {};
+
+function initialise() {
+  return browser.storage.local.get(null).then((localStore) => {
+    store = localStore;
   });
 }
 
 function displayGroupList() {
   let groupList = document.getElementById("group-list");
-  browser.storage.local.get(null).then((store) => {
-    let props = Object.keys(store).reverse();
-    props.forEach((prop) => {
-      let groupElement = document.createElement("div");
-      groupElement.className = "tab-group";
 
-      groupElement.setAttribute("prop", prop);
+  let props = Object.keys(store).reverse();
+  props.forEach((prop) => {
+    let groupElement = document.createElement("div");
+    groupElement.className = "tab-group";
 
-      let list = document.createElement("ul");
+    groupElement.setAttribute("prop", prop);
 
-      list.ondrop = listonDrop;
+    let list = document.createElement("ul");
 
-      store[prop].forEach((tab, i) => {
-        let tabElement = document.createElement("li");
+    list.ondrop = listonDrop;
 
-        let deleteBtn = document.createElement("button");
-        deleteBtn.className = "delete-tab list-item";
-        deleteBtn.innerHTML = "&#x2A09";
-        let bulletPoint = document.createElement("button");
-        bulletPoint.className = "bullet list-item";
-        bulletPoint.innerHTML = "&#9726";
-        tabElement.appendChild(deleteBtn);
-        tabElement.appendChild(bulletPoint);
-
-        tabElement.setAttribute("prop", prop);
-        tabElement.setAttribute("index", i);
-        tabElement.id = tab.id;
-        let tabLink = document.createElement("a");
-        tabLink.href = tab.url;
-        tabLink.innerText = tab.title;
-        tabLink.setAttribute("target", "__blank");
-        tabElement.appendChild(tabLink);
-
-        tabElement.addEventListener("dragstart", (e) => {
-          e.dataTransfer.setData("element-data", tab.id);
-        });
-        tabElement.addEventListener("dragover", (e) => e.preventDefault());
-
-        deleteBtn.addEventListener("click", () => {
-          store[prop].splice(i, 1);
-          return browser.storage.local
-            .set({ [prop]: store[prop] })
-            .then(() => window.location.reload())
-            .catch((err) => console.log(err));
-        });
-
-        list.appendChild(tabElement);
-      });
-
-      let header = document.createElement("div");
-      header.className = "header";
-
-      let restoreBtn = document.createElement("button");
-      restoreBtn.className = "restore";
-      restoreBtn.innerHTML = "Restore";
-      header.appendChild(restoreBtn);
-
-      restoreBtn.addEventListener("click", () => {
-        restore(store[prop]);
-      });
+    store[prop].forEach((tab, i) => {
+      let tabElement = document.createElement("li");
 
       let deleteBtn = document.createElement("button");
-      deleteBtn.className = "delete";
-      deleteBtn.innerHTML = "Delete";
-      header.appendChild(deleteBtn);
+      deleteBtn.className = "delete-tab list-item";
+      deleteBtn.innerHTML = "&#x2A09";
+      deleteBtn.setAttribute("prop", prop);
+      deleteBtn.setAttribute("index", i);
+      tabElement.appendChild(deleteBtn);
 
-      deleteBtn.addEventListener("click", () => {
-        confirm("Are you sure you want to delete this group?") &&
-          browser.storage.local.remove(prop).then(window.location.reload());
+      let bulletPoint = document.createElement("button");
+      bulletPoint.className = "bullet list-item";
+      bulletPoint.innerHTML = "&#9726";
+      tabElement.appendChild(bulletPoint);
+
+      tabElement.setAttribute("prop", prop);
+      tabElement.setAttribute("index", i);
+      tabElement.id = tab.id;
+      let tabLink = document.createElement("a");
+      tabLink.href = tab.url;
+      tabLink.innerText = tab.title;
+      tabLink.setAttribute("target", "__blank");
+      tabElement.appendChild(tabLink);
+
+      tabElement.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("element-data", tab.id);
       });
+      tabElement.addEventListener("dragover", (e) => e.preventDefault());
 
-      groupElement.appendChild(header);
-      groupElement.appendChild(list);
-      groupList.appendChild(groupElement);
+      list.appendChild(tabElement);
     });
+
+    let header = document.createElement("div");
+    header.className = "header";
+
+    let restoreBtn = document.createElement("button");
+    restoreBtn.className = "restore";
+    restoreBtn.innerHTML = "Restore";
+    restoreBtn.setAttribute("prop", prop);
+    header.appendChild(restoreBtn);
+
+    let deleteBtn = document.createElement("button");
+    deleteBtn.className = "delete";
+    deleteBtn.innerHTML = "Delete";
+    deleteBtn.setAttribute("prop", prop);
+    header.appendChild(deleteBtn);
+
+    groupElement.appendChild(header);
+    groupElement.appendChild(list);
+    groupList.appendChild(groupElement);
   });
 }
 
-document.addEventListener("DOMContentLoaded", displayGroupList);
+document.addEventListener("DOMContentLoaded", () => {
+  initialise().then(displayGroupList);
+});
 
-document
-  .getElementById("group-list")
-  .addEventListener("click", (e) => console.log(e));
+document.getElementById("group-list").addEventListener("click", (e) => {
+  if (e.target && e.target.matches("button.restore")) {
+    let prop = e.target.getAttribute("prop");
+    return restore(prop);
+  }
+
+  if (e.target && e.target.matches("button.delete")) {
+    let prop = e.target.getAttribute("prop");
+    return (
+      confirm("Are you sure you want to delete this group?") &&
+      browser.storage.local.remove(prop).then(window.location.reload())
+    );
+  }
+
+  if (e.target && e.target.matches("button.delete-tab")) {
+    let prop = e.target.getAttribute("prop");
+    let i = e.target.getAttribute("i");
+    store[prop].splice(i, 1);
+    return browser.storage.local
+      .set({ [prop]: store[prop] })
+      .then(() => window.location.reload())
+      .catch((err) => console.log(err));
+  }
+});
 
 document.getElementById("clear-storage-btn").addEventListener("click", () => {
   confirm("Yo homie ya ight?") &&
