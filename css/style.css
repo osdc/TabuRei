@@ -81,6 +81,8 @@ button.popup {
 
 button.list-item {
   width: 3em;
+  line-height: 20px;
+  color: #393e46;
   display: inline-block;
   text-align: center;
 }
@@ -106,13 +108,14 @@ button.bullet {
 }
 
 .tab-group .header {
-  float: inline-end;
+  float: right;
   display: flex;
   justify-content: space-between;
 }
 
 li:hover {
   background-color: #393e46;
+  font-weight: bold;
 }
 
 li:hover button.bullet {
@@ -125,10 +128,10 @@ li:hover button.delete-tab {
   display: inline-block;
 }
 
-button.delete-tab:hover ~ a {
+button.delete-tab:hover ~ span {
   text-decoration: line-through;
 }
 
 #clear-storage-btn {
-  float: inline-end;
+  float: right;
 }
