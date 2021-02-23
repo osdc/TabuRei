@@ -12,39 +12,15 @@ function displayGroupList() {
       let groupElement = document.createElement("div");
       groupElement.className = "tab-group";
 
+      groupElement.setAttribute("prop", prop);
+
       let list = document.createElement("ul");
-      list.ondrop = function (e) {
-        e.preventDefault();
-        const data = e.dataTransfer.getData("element-data");
-        const element = document.getElementById(data);
-        list.appendChild(element);
-        const elementProp = element.getAttribute("prop");
-        const index = element.getAttribute("index");
-        const originalStore = store[elementProp];
-        const updatedStore = store[prop];
-        if (elementProp !== prop) {
-          updatedStore.push(originalStore[index]);
-          originalStore.splice(index, 1);
-          if (originalStore.length === 0) {
-            browser.storage.local.set({
-              [prop]: updatedStore,
-            });
-            return browser.storage.local
-              .remove(elementProp)
-              .then(window.location.reload());
-          }
-          browser.storage.local
-            .set({
-              [elementProp]: originalStore,
-              [prop]: updatedStore,
-            })
-            .then((data) => window.location.reload())
-            .catch((err) => console.log(err));
-        }
-      };
+
+      list.ondrop = listonDrop;
 
       store[prop].forEach((tab, i) => {
         let tabElement = document.createElement("li");
+
         let deleteBtn = document.createElement("button");
         deleteBtn.className = "delete-tab list-item";
         deleteBtn.innerHTML = "&#x2A09";
@@ -53,6 +29,7 @@ function displayGroupList() {
         bulletPoint.innerHTML = "&#9726";
         tabElement.appendChild(deleteBtn);
         tabElement.appendChild(bulletPoint);
+
         tabElement.setAttribute("prop", prop);
         tabElement.setAttribute("index", i);
         tabElement.id = tab.id;
@@ -68,9 +45,11 @@ function displayGroupList() {
         tabElement.addEventListener("dragover", (e) => e.preventDefault());
 
         deleteBtn.addEventListener("click", () => {
-          tabElement.parentNode.removeChild(tabElement);
           store[prop].splice(i, 1);
-          return browser.storage.local.set({ [prop]: store[prop] });
+          return browser.storage.local
+            .set({ [prop]: store[prop] })
+            .then(() => window.location.reload())
+            .catch((err) => console.log(err));
         });
 
         list.appendChild(tabElement);
@@ -107,7 +86,41 @@ function displayGroupList() {
 
 document.addEventListener("DOMContentLoaded", displayGroupList);
 
+document
+  .getElementById("group-list")
+  .addEventListener("click", (e) => console.log(e));
+
 document.getElementById("clear-storage-btn").addEventListener("click", () => {
   confirm("Yo homie ya ight?") &&
     browser.storage.local.clear().then(window.location.reload());
 });
+
+function listonDrop(e) {
+  e.preventDefault();
+  const data = e.dataTransfer.getData("element-data");
+  const element = document.getElementById(data);
+  list.appendChild(element);
+  const elementProp = element.getAttribute("prop");
+  const index = element.getAttribute("index");
+  const originalStore = store[elementProp];
+  const updatedStore = store[prop];
+  if (elementProp !== prop) {
+    updatedStore.push(originalStore[index]);
+    originalStore.splice(index, 1);
+    if (originalStore.length === 0) {
+      browser.storage.local.set({
+        [prop]: updatedStore,
+      });
+      return browser.storage.local
+        .remove(elementProp)
+        .then(window.location.reload());
+    }
+    browser.storage.local
+      .set({
+        [elementProp]: originalStore,
+        [prop]: updatedStore,
+      })
+      .then(() => window.location.reload())
+      .catch((err) => console.log(err));
+  }
+}
