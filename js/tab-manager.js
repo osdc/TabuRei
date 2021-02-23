@@ -24,7 +24,7 @@ function displayGroupList() {
 
     let list = document.createElement("ul");
 
-    list.ondrop = listonDrop;
+    list.ondrop = (e) => listonDrop(e, prop, list);
 
     store[prop].forEach((tab, i) => {
       let tabElement = document.createElement("li");
@@ -41,6 +41,7 @@ function displayGroupList() {
       bulletPoint.innerHTML = "&#9726";
       tabElement.appendChild(bulletPoint);
 
+      tabElement.setAttribute("draggable", true);
       tabElement.setAttribute("prop", prop);
       tabElement.setAttribute("index", i);
       tabElement.id = tab.id;
@@ -119,7 +120,7 @@ document.getElementById("clear-storage-btn").addEventListener("click", () => {
     browser.storage.local.clear().then(window.location.reload());
 });
 
-function listonDrop(e) {
+function listonDrop(e, prop, list) {
   e.preventDefault();
   const data = e.dataTransfer.getData("element-data");
   const element = document.getElementById(data);
