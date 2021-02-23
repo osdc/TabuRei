@@ -28,17 +28,19 @@ function displayGroupList() {
 
     store[prop].forEach((tab, i) => {
       let tabElement = document.createElement("li");
+      list.title = "Click to restore this tab, Drag to drop to another group";
 
       let deleteBtn = document.createElement("button");
       deleteBtn.className = "delete-tab list-item";
       deleteBtn.innerHTML = "&#x2A09";
+      deleteBtn.title = "Click to delete this tab listing";
       deleteBtn.setAttribute("prop", prop);
       deleteBtn.setAttribute("index", i);
       tabElement.appendChild(deleteBtn);
 
       let bulletPoint = document.createElement("button");
       bulletPoint.className = "bullet list-item";
-      bulletPoint.innerHTML = "&#9726";
+      bulletPoint.innerHTML = "&#x25A0";
       tabElement.appendChild(bulletPoint);
 
       tabElement.setAttribute("draggable", true);
@@ -46,7 +48,8 @@ function displayGroupList() {
       tabElement.setAttribute("index", i);
       tabElement.id = tab.id;
 
-      let tabLink = document.createTextNode(tab.title);
+      let tabLink = document.createElement("span");
+      tabLink.appendChild(document.createTextNode(tab.title));
       tabElement.appendChild(tabLink);
 
       tabElement.addEventListener("dragstart", (e) => {
