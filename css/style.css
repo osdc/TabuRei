@@ -135,3 +135,69 @@ button.delete-tab:hover ~ span {
 #clear-storage-btn {
   float: right;
 }
+
+.crossed {
+  text-decoration: line-through;
+}
+
+.popup-container {
+  max-width: 480px;
+}
+
+/* Checkbox */
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  width: 90%;
+  cursor: pointer;
+  word-wrap: break-word;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: #393e46;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  outline: 2px solid #de193e;
+  outline-offset: -2px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  top: -2px;
+  left: 1px;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  content: "\2A09";
+  color: #de193e;
+}
