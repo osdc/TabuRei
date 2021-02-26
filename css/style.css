@@ -147,7 +147,7 @@ button.delete-tab:hover ~ span {
 /* Checkbox */
 
 /* The container */
-.container {
+.popup-element-container {
   display: block;
   position: relative;
   padding-left: 35px;
@@ -155,10 +155,11 @@ button.delete-tab:hover ~ span {
   width: 90%;
   cursor: pointer;
   word-wrap: break-word;
+  line-height: 20px;
 }
 
 /* Hide the browser's default checkbox */
-.container input {
+.popup-element-container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -169,15 +170,20 @@ button.delete-tab:hover ~ span {
 /* Create a custom checkbox */
 .checkmark {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
   height: 16px;
   width: 16px;
   background-color: #393e46;
 }
 
+.popup-element-container:hover {
+  background-color: #393e46;
+}
+
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.popup-element-container:hover input ~ .checkmark {
   outline: 2px solid #de193e;
   outline-offset: -2px;
 }
@@ -187,17 +193,17 @@ button.delete-tab:hover ~ span {
   content: "";
   position: absolute;
   display: none;
-  top: -2px;
-  left: 1px;
+  top: -3px;
+  left: 0px;
 }
 
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
+.popup-element-container input:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the checkmark/indicator */
-.container .checkmark:after {
+.popup-element-container .checkmark:after {
   content: "\2A09";
   color: #de193e;
 }

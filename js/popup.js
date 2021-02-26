@@ -11,7 +11,7 @@ function listTabs() {
     for (let tab of tabs) {
       if (!tab.url.startsWith("about:")) {
         let tabElement = document.createElement("label");
-        tabElement.classList.add("container");
+        tabElement.classList.add("popup-element-container");
         let tabTitle = document.createTextNode(tab.title);
         tabElement.appendChild(tabTitle);
         tabElement.setAttribute("tab-id", tab.id);
@@ -38,9 +38,9 @@ function listTabs() {
   });
 }
 
-function storeTabs(tabs) {
+function storeTabs(tabs, blacklistedTabs) {
   const validTabs = tabs.filter(
-    (tab) => !tab.url.startsWith("about:") && !blacklist.includes(tab.id)
+    (tab) => !tab.url.startsWith("about:") && !blacklistedTabs.includes(tab.id)
   );
 
   let allowedProperties = [
@@ -73,10 +73,9 @@ function storeTabs(tabs) {
   return browser.storage.local.set(store);
 }
 
-document.addEventListener("DOMContentLoaded", listTabs);
-document.getElementById("collapse").addEventListener("click", function () {
+function onBtnClick(blackedlistedArray) {
   getCurrentWindowTabs().then((tabs) => {
-    let storing = storeTabs(tabs);
+    let storing = storeTabs(tabs, blackedlistedArray);
     Promise.resolve(storing);
 
     let creating = browser.tabs.create({
@@ -86,13 +85,23 @@ document.getElementById("collapse").addEventListener("click", function () {
     Promise.resolve(creating);
 
     for (let tab of tabs) {
-      if (!blacklist.includes(tab.id)) {
+      if (!blackedlistedArray.includes(tab.id)) {
         let removing = browser.tabs.remove(tab.id);
         Promise.resolve(removing);
       }
     }
   });
-});
+}
+
+document.addEventListener("DOMContentLoaded", listTabs);
+
+document
+  .getElementById("collapse")
+  .addEventListener("click", () => onBtnClick([]));
+
+document
+  .getElementById("collapse-unselected")
+  .addEventListener("click", () => onBtnClick(blacklist));
 
 document.getElementById("tab-manager").addEventListener("click", function () {
   let creating = browser.tabs.create({
