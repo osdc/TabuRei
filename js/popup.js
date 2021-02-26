@@ -27,7 +27,7 @@ function listTabs() {
 }
 
 function storeTabs(tabs) {
-  const validTabs = tabs.filter((tab) => !tab.url.startsWith("about:"));
+  const validTabs = tabs.filter((tab) => (!tab.url.startsWith("about:") && tab.title != "TabuRei"));
 
   let allowedProperties = [
     "url",
