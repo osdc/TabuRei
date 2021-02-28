@@ -2,6 +2,13 @@ function getCurrentWindowTabs() {
   return browser.tabs.query({ currentWindow: true });
 }
 
+function isValidTab(tab) {
+	if (!tab.url.startsWith("about:") &&
+		tab.title != "TabuRei")
+		return true;
+	return false;
+}
+
 function listTabs() {
   getCurrentWindowTabs().then((tabs) => {
     let tabsList = document.getElementById("tabs-list");
@@ -27,7 +34,7 @@ function listTabs() {
 }
 
 function storeTabs(tabs) {
-  const validTabs = tabs.filter((tab) => (!tab.url.startsWith("about:") && tab.title != "TabuRei"));
+  const validTabs = tabs.filter(isValidTab);
 
   let allowedProperties = [
     "url",
