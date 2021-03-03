@@ -101,6 +101,12 @@ button.bullet {
   background: none;
 }
 
+button.add-tab {
+  background: none;
+  color: #21e6c1;
+  border: none;
+}
+
 .tab-group {
   border: 4px solid #393e46;
   margin-bottom: 1em;
@@ -108,9 +114,25 @@ button.bullet {
 }
 
 .tab-group .header {
-  float: right;
   display: flex;
+  width: 100%;
   justify-content: space-between;
+}
+
+button.restore, button.delete {
+  float: right;
+}
+
+.group-name {
+  background-color: transparent;
+  color: #bbe1fa;
+  border: unset;
+  font-size: x-large;
+}
+
+.number-of-tabs {
+  float: left;
+  padding-left: 5%;
 }
 
 li:hover {

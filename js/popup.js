@@ -66,8 +66,13 @@ function storeTabs(tabs, blacklistedTabs) {
 
   let groupId = performance.timeOrigin + performance.now();
 
+  let groupInfo = {
+    groupName: "( ͡ ° ͜ʖ ͡ ° )",
+    tabList: storedTabs
+  }
+
   let store = {
-    [groupId]: storedTabs,
+    [groupId]: groupInfo,
   };
 
   return browser.storage.local.set(store);

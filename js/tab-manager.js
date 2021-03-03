@@ -1,5 +1,5 @@
 function restore(groupID) {
-  store[groupID].forEach((tab) => {
+  store[groupID].tabList.forEach((tab) => {
     browser.tabs.create(tab.create).catch((err) => console.debug(err));
   });
 }
@@ -10,6 +10,45 @@ function initialise() {
   return browser.storage.local.get(null).then((localStore) => {
     store = localStore;
   });
+}
+
+function displayGroupProperties(parent, id) {
+  let num = store[id].tabList.length;
+  let numberLabel = document.createElement("span");
+  numberLabel.setAttribute("prop", id)
+  let word = (num === 1) ? " Tab" : " Tabs";
+  numberLabel.innerHTML = num + word;
+  numberLabel.className = "number-of-tabs";
+
+  let groupNameLabel = document.createElement("input");
+  groupNameLabel.setAttribute("prop", id)
+  groupNameLabel.value = store[id].groupName
+  groupNameLabel.className = "group-name";
+
+  groupNameLabel.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+      let out = {
+        groupName: groupNameLabel.value,
+        tabList: store[id].tabList
+      }
+      browser.storage.local.set({[id]: out})
+        .catch((err) => console.debug(err));
+
+      document.activeElement.blur();
+    }
+  })
+
+  groupNameLabel.addEventListener("change", () => {
+    let out = {
+      groupName: groupNameLabel.value,
+      tabList: store[id].tabList
+    }
+    browser.storage.local.set({[id]: out})
+      .catch((err) => console.debug(err));
+  })
+
+  parent.appendChild(numberLabel);
+  parent.appendChild(groupNameLabel);
 }
 
 function displayGroupList() {
@@ -26,7 +65,7 @@ function displayGroupList() {
 
     list.ondrop = (e) => listonDrop(e, prop, list);
 
-    store[prop].forEach((tab, i) => {
+    store[prop].tabList.forEach((tab, i) => {
       let tabElement = document.createElement("li");
       list.title = "Click to restore this tab, Drag to drop to another group";
 
@@ -64,20 +103,25 @@ function displayGroupList() {
 
     let header = document.createElement("div");
     header.className = "header";
+    let groupButtons = document.createElement("div");
+    groupButtons.className = "group-buttons";
+
+    displayGroupProperties(header, prop);
 
     let restoreBtn = document.createElement("button");
     restoreBtn.className = "restore";
     restoreBtn.innerHTML = "Restore";
     restoreBtn.setAttribute("prop", prop);
-    header.appendChild(restoreBtn);
+    groupButtons.appendChild(restoreBtn);
 
     let deleteBtn = document.createElement("button");
     deleteBtn.className = "delete";
     deleteBtn.innerHTML = "Delete";
     deleteBtn.setAttribute("prop", prop);
-    header.appendChild(deleteBtn);
+    groupButtons.appendChild(deleteBtn);
 
     groupElement.appendChild(header);
+    header.appendChild(groupButtons);
     groupElement.appendChild(list);
     groupList.appendChild(groupElement);
   });
@@ -103,19 +147,23 @@ document.getElementById("group-list").addEventListener("click", (e) => {
 
   if (e.target && e.target.matches("button.delete-tab")) {
     let prop = e.target.getAttribute("prop");
-    let i = e.target.getAttribute("i");
-    store[prop].splice(i, 1);
+    let i = e.target.getAttribute("index");
+    store[prop].tabList.splice(i, 1);
+    let out = {
+      groupName: store[prop].groupName,
+      tabList: store[prop].tabList
+    }
     return browser.storage.local
-      .set({ [prop]: store[prop] })
+      .set({ [prop]: out })
       .then(() => window.location.reload())
       .catch((err) => console.log(err));
   }
 
   if ((e.target && e.target.matches("li")) || e.target.matches("span")) {
     let prop = e.target.getAttribute("prop");
-    let i = Number(e.target.getAttribute("i"));
+    let i = Number(e.target.getAttribute("index"));
     return browser.tabs
-      .create(store[prop][i].create)
+      .create((store[prop].tabList)[i].create)
       .catch((err) => console.debug(err));
   }
 });
@@ -132,23 +180,39 @@ function listonDrop(e, prop, list) {
   list.appendChild(element);
   const elementProp = element.getAttribute("prop");
   const index = element.getAttribute("index");
-  const originalStore = store[elementProp];
-  const updatedStore = store[prop];
+  const originalTabList = store[elementProp].tabList;
+  const updatedTabList = store[prop].tabList;
+
   if (elementProp !== prop) {
-    updatedStore.push(originalStore[index]);
-    originalStore.splice(index, 1);
-    if (originalStore.length === 0) {
+    updatedTabList.push(originalTabList[index]);
+    originalTabList.splice(index, 1);
+    if (originalTabList.length === 0) {
+      let out = {
+        groupName: store[prop].groupName,
+        tabList: updatedTabList
+      }
+
       browser.storage.local.set({
-        [prop]: updatedStore,
+        [prop]: out,
       });
       return browser.storage.local
         .remove(elementProp)
         .then(window.location.reload());
     }
+
+    let originalOut = {
+      groupName: store[elementProp].groupName,
+      tabList: originalTabList
+    }
+    let updatedOut = {
+      groupName: store[prop].groupName,
+      tabList: updatedTabList
+    }
+
     browser.storage.local
       .set({
-        [elementProp]: originalStore,
-        [prop]: updatedStore,
+        [elementProp]: originalOut,
+        [prop]: updatedOut,
       })
       .then(() => window.location.reload())
       .catch((err) => console.log(err));
