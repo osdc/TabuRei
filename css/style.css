@@ -135,3 +135,79 @@ button.delete-tab:hover ~ span {
 #clear-storage-btn {
   float: right;
 }
+
+.crossed {
+  text-decoration: line-through;
+}
+
+.popup-container {
+  max-width: 480px;
+}
+
+.hidden-btn {
+  display: none;
+}
+
+/* Checkbox */
+
+/* The container */
+.popup-element-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  width: 90%;
+  cursor: pointer;
+  word-wrap: break-word;
+  line-height: 20px;
+}
+
+/* Hide the browser's default checkbox */
+.popup-element-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  height: 16px;
+  width: 16px;
+  background-color: #393e46;
+}
+
+.popup-element-container:hover {
+  background-color: #393e46;
+}
+
+/* On mouse-over, add a grey background color */
+.popup-element-container:hover input ~ .checkmark {
+  outline: 2px solid #de193e;
+  outline-offset: -2px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  top: -3px;
+  left: 0px;
+}
+
+/* Show the checkmark when checked */
+.popup-element-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.popup-element-container .checkmark:after {
+  content: "\2A09";
+  color: #de193e;
+}
