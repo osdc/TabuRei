@@ -144,6 +144,10 @@ button.delete-tab:hover ~ span {
   max-width: 480px;
 }
 
+.hidden-btn {
+  display: none;
+}
+
 /* Checkbox */
 
 /* The container */

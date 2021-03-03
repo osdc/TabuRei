@@ -113,11 +113,16 @@ document.getElementById("tab-manager").addEventListener("click", function () {
 const removeTab = (e) => {
   const parent = e.target.parentElement;
   const tabId = +parent.getAttribute("tab-id");
+  const conditionalBtn = document.getElementById("collapse-unselected");
   if (e.target.checked) {
     blacklist.push(tabId);
     parent.classList.add("crossed");
+    conditionalBtn.classList.remove("hidden-btn");
   } else {
     blacklist = blacklist.filter((id) => id != tabId);
     parent.classList.remove("crossed");
+    if (blacklist.length === 0) {
+      conditionalBtn.classList.add("hidden-btn");
+    }
   }
 };
