@@ -14,41 +14,43 @@ function initialise() {
 
 function displayGroupProperties(parent, id) {
   let num = store[id].tabList.length;
-  let numberLabel = document.createElement("span");
-  numberLabel.setAttribute("prop", id)
-  let word = (num === 1) ? " Tab" : " Tabs";
+  let numberLabel = document.createElement("div");
+  numberLabel.setAttribute("prop", id);
+  let word = num === 1 ? " Tab" : " Tabs";
   numberLabel.innerHTML = num + word;
   numberLabel.className = "number-of-tabs";
 
   let groupNameLabel = document.createElement("input");
-  groupNameLabel.setAttribute("prop", id)
-  groupNameLabel.value = store[id].groupName
+  groupNameLabel.setAttribute("prop", id);
+  groupNameLabel.value = store[id].groupName;
+  groupNameLabel.placeholder = "( ͡ ° ͜ʖ ͡ ° )";
   groupNameLabel.className = "group-name";
+  groupNameLabel.title = "Enter the name of the group here";
 
-  groupNameLabel.addEventListener("keyup", function(event) {
+  groupNameLabel.addEventListener("keyup", function (event) {
     if (event.keyCode === 13) {
       let out = {
         groupName: groupNameLabel.value,
-        tabList: store[id].tabList
-      }
-      browser.storage.local.set({[id]: out})
+        tabList: store[id].tabList,
+      };
+      browser.storage.local
+        .set({ [id]: out })
         .catch((err) => console.debug(err));
 
       document.activeElement.blur();
     }
-  })
+  });
 
   groupNameLabel.addEventListener("change", () => {
     let out = {
       groupName: groupNameLabel.value,
-      tabList: store[id].tabList
-    }
-    browser.storage.local.set({[id]: out})
-      .catch((err) => console.debug(err));
-  })
+      tabList: store[id].tabList,
+    };
+    browser.storage.local.set({ [id]: out }).catch((err) => console.debug(err));
+  });
 
-  parent.appendChild(numberLabel);
   parent.appendChild(groupNameLabel);
+  parent.appendChild(numberLabel);
 }
 
 function displayGroupList() {
@@ -151,8 +153,8 @@ document.getElementById("group-list").addEventListener("click", (e) => {
     store[prop].tabList.splice(i, 1);
     let out = {
       groupName: store[prop].groupName,
-      tabList: store[prop].tabList
-    }
+      tabList: store[prop].tabList,
+    };
     return browser.storage.local
       .set({ [prop]: out })
       .then(() => window.location.reload())
@@ -163,7 +165,7 @@ document.getElementById("group-list").addEventListener("click", (e) => {
     let prop = e.target.getAttribute("prop");
     let i = Number(e.target.getAttribute("index"));
     return browser.tabs
-      .create((store[prop].tabList)[i].create)
+      .create(store[prop].tabList[i].create)
       .catch((err) => console.debug(err));
   }
 });
@@ -189,8 +191,8 @@ function listonDrop(e, prop, list) {
     if (originalTabList.length === 0) {
       let out = {
         groupName: store[prop].groupName,
-        tabList: updatedTabList
-      }
+        tabList: updatedTabList,
+      };
 
       browser.storage.local.set({
         [prop]: out,
@@ -202,12 +204,12 @@ function listonDrop(e, prop, list) {
 
     let originalOut = {
       groupName: store[elementProp].groupName,
-      tabList: originalTabList
-    }
+      tabList: originalTabList,
+    };
     let updatedOut = {
       groupName: store[prop].groupName,
-      tabList: updatedTabList
-    }
+      tabList: updatedTabList,
+    };
 
     browser.storage.local
       .set({

@@ -114,25 +114,31 @@ button.add-tab {
 }
 
 .tab-group .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
   width: 100%;
-  justify-content: space-between;
+  font-size: 16px;
 }
 
-button.restore, button.delete {
-  float: right;
+.tab-group .group-buttons {
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .group-name {
   background-color: transparent;
-  color: #bbe1fa;
+  color: #21e6c1;
   border: unset;
-  font-size: x-large;
+  font-weight: bolder;
 }
 
 .number-of-tabs {
-  float: left;
-  padding-left: 5%;
+  height: 100%;
+  font-weight: bolder;
+  color: #21e6c1;
+  padding: 10px;
+  text-align: center;
 }
 
 li:hover {

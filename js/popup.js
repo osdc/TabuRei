@@ -22,14 +22,6 @@ function listTabs() {
         let checkmark = document.createElement("span");
         checkmark.classList.add("checkmark");
         tabElement.appendChild(checkmark);
-        // let bulletPoint = document.createElement("button");
-        // bulletPoint.className = "popup";
-        // bulletPoint.innerHTML = "&#9726";
-        // bulletPoint.disabled = true;
-        // tabElement.appendChild(bulletPoint);
-        // let tabLink = document.createElement("a");
-        // tabLink.href = tab.url;
-        // tabElement.appendChild(tabLink);
         currentTabs.appendChild(tabElement);
       }
     }
@@ -67,9 +59,9 @@ function storeTabs(tabs, blacklistedTabs) {
   let groupId = performance.timeOrigin + performance.now();
 
   let groupInfo = {
-    groupName: "( ͡ ° ͜ʖ ͡ ° )",
-    tabList: storedTabs
-  }
+    groupName: "",
+    tabList: storedTabs,
+  };
 
   let store = {
     [groupId]: groupInfo,
