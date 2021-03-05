@@ -14,7 +14,9 @@ function initialise() {
 
 function displayGroupProperties(parent, id) {
   let num = store[id].tabList.length;
-  let numberLabel = document.createElement("div");
+  let groupTitle = document.createElement("div");
+  groupTitle.className = "title";
+  let numberLabel = document.createElement("p");
   numberLabel.setAttribute("prop", id);
   let word = num === 1 ? " Tab" : " Tabs";
   numberLabel.innerHTML = num + word;
@@ -49,8 +51,9 @@ function displayGroupProperties(parent, id) {
     browser.storage.local.set({ [id]: out }).catch((err) => console.debug(err));
   });
 
-  parent.appendChild(groupNameLabel);
-  parent.appendChild(numberLabel);
+  groupTitle.appendChild(numberLabel);
+  groupTitle.appendChild(groupNameLabel);
+  parent.appendChild(groupTitle);
 }
 
 function displayGroupList() {

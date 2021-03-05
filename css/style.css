@@ -114,11 +114,9 @@ button.add-tab {
 }
 
 .tab-group .header {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  font-size: 16px;
 }
 
 .tab-group .group-buttons {
@@ -126,19 +124,29 @@ button.add-tab {
   flex-direction: row-reverse;
 }
 
+.tab-group .title {
+  display: flex;
+  flex-direction: row;
+}
+
 .group-name {
   background-color: transparent;
   color: #21e6c1;
   border: unset;
   font-weight: bolder;
+  font-size: 20px;
+  padding-left: 1em;
+  display: block;
+  line-height: 2em;
+  border-left: 2px solid #21e6c1;
 }
 
 .number-of-tabs {
-  height: 100%;
-  font-weight: bolder;
+  font-weight: bold;
   color: #21e6c1;
-  padding: 10px;
-  text-align: center;
+  padding-left: 1em;
+  width: 5em;
+  font-size: 16px;
 }
 
 li:hover {
