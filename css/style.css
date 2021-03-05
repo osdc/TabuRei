@@ -10,6 +10,8 @@ body {
   min-width: 360px;
   background-color: #232931;
   color: #eeeeee;
+  display: flex;
+  justify-content: center;
 }
 
 .container {
@@ -67,7 +69,13 @@ li {
 
 .popup-buttons {
   display: flex;
+  position: sticky;
+  bottom: 0;
+  padding: 1rem 0;
   justify-content: center;
+  background-color: #232931;  
+  z-index: 1;
+  box-shadow: 0 -.3rem 8px #232931;
 }
 
 button.popup {
