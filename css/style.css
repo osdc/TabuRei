@@ -70,12 +70,12 @@ li {
 .popup-buttons {
   display: flex;
   position: sticky;
-  top: 0;
+  bottom: 0;
   padding: 1rem 0;
   justify-content: center;
   background-color: #232931;  
   z-index: 1;
-  box-shadow: 0 .3rem 8px #232931;
+  box-shadow: 0 -.3rem 8px #232931;
 }
 
 button.popup {
