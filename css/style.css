@@ -73,9 +73,9 @@ li {
   bottom: 0;
   padding: 1rem 0;
   justify-content: center;
-  background-color: #232931;  
+  background-color: #232931;
   z-index: 1;
-  box-shadow: 0 -.3rem 8px #232931;
+  box-shadow: 0 -0.3rem 8px #232931;
 }
 
 button.popup {
@@ -197,6 +197,22 @@ button.delete-tab:hover ~ span {
   display: none;
 }
 
+.tab-container {
+  display: flex;
+  line-height: 25px;
+  word-wrap: break-word;
+  width: 90%;
+  margin: 5px 0;
+}
+
+.tab-container span {
+  cursor: pointer;
+}
+
+.tab-container:hover {
+  background-color: #222224;
+}
+
 /* Checkbox */
 
 /* The container */
@@ -204,11 +220,7 @@ button.delete-tab:hover ~ span {
   display: block;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 12px;
-  width: 90%;
   cursor: pointer;
-  word-wrap: break-word;
-  line-height: 20px;
 }
 
 /* Hide the browser's default checkbox */
@@ -231,10 +243,6 @@ button.delete-tab:hover ~ span {
   background-color: #393e46;
 }
 
-.popup-element-container:hover {
-  background-color: #393e46;
-}
-
 /* On mouse-over, add a grey background color */
 .popup-element-container:hover input ~ .checkmark {
   outline: 2px solid #de193e;
@@ -246,7 +254,7 @@ button.delete-tab:hover ~ span {
   content: "";
   position: absolute;
   display: none;
-  top: -3px;
+  top: -6px;
   left: 0px;
 }
 
