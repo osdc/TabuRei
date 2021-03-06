@@ -5,10 +5,8 @@ function getCurrentWindowTabs() {
 }
 
 function isValidTab(tab) {
-	if (!tab.url.startsWith("about:") &&
-		tab.title != "TabuRei")
-		return true;
-	return false;
+  if (!tab.url.startsWith("about:") && tab.title != "TabuRei") return true;
+  return false;
 }
 
 function listTabs() {
@@ -17,11 +15,14 @@ function listTabs() {
     let currentTabs = document.createDocumentFragment();
     for (let tab of tabs) {
       if (!tab.url.startsWith("about:")) {
+        const tabContainer = document.createElement("div");
+        tabContainer.classList.add("tab-container");
         let tabElement = document.createElement("label");
         tabElement.classList.add("popup-element-container");
-        let tabTitle = document.createTextNode(tab.title);
-        tabElement.appendChild(tabTitle);
-        tabElement.setAttribute("tab-id", tab.id);
+        let tabTitle = document.createElement("span");
+        tabTitle.innerText = tab.title;
+        tabTitle.addEventListener("click", activateTab);
+        tabContainer.setAttribute("tab-id", tab.id);
         let checkbox = document.createElement("input");
         checkbox.setAttribute("type", "checkbox");
         checkbox.addEventListener("click", removeTab);
@@ -29,7 +30,9 @@ function listTabs() {
         let checkmark = document.createElement("span");
         checkmark.classList.add("checkmark");
         tabElement.appendChild(checkmark);
-        currentTabs.appendChild(tabElement);
+        tabContainer.appendChild(tabElement);
+        tabContainer.appendChild(tabTitle);
+        currentTabs.appendChild(tabContainer);
       }
     }
 
@@ -115,7 +118,7 @@ document.getElementById("tab-manager").addEventListener("click", function () {
 });
 
 const removeTab = (e) => {
-  const parent = e.target.parentElement;
+  const parent = e.target.parentElement.parentElement;
   const tabId = +parent.getAttribute("tab-id");
   const conditionalBtn = document.getElementById("collapse-unselected");
   if (e.target.checked) {
@@ -129,4 +132,9 @@ const removeTab = (e) => {
       conditionalBtn.classList.add("hidden-btn");
     }
   }
+};
+
+const activateTab = (e) => {
+  const tabId = +e.target.parentElement.getAttribute("tab-id");
+  browser.tabs.update(tabId, { active: true });
 };
