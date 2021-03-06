@@ -109,6 +109,12 @@ button.bullet {
   background: none;
 }
 
+button.add-tab {
+  background: none;
+  color: #21e6c1;
+  border: none;
+}
+
 .tab-group {
   border: 4px solid #393e46;
   margin-bottom: 1em;
@@ -116,9 +122,44 @@ button.bullet {
 }
 
 .tab-group .header {
-  float: right;
   display: flex;
   justify-content: space-between;
+  width: 100%;
+}
+
+.tab-group .group-buttons {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.tab-group .title {
+  display: flex;
+  flex-direction: row;
+}
+
+.group-name {
+  background-color: transparent;
+  color: #21e6c1;
+  border: unset;
+  font-weight: bolder;
+  font-size: 20px;
+  padding-left: 1em;
+  display: block;
+  line-height: 2em;
+}
+
+.number-of-tabs {
+  font-weight: bold;
+  color: #21e6c1;
+  padding-left: 1em;
+  width: 5em;
+  font-size: 16px;
+}
+
+.tab-group .divider {
+  width: 2px;
+  margin: 6px 0;
+  background: #21e6c1;
 }
 
 li:hover {
