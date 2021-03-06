@@ -19,7 +19,8 @@ function displayGroupProperties(parent, id) {
   let numberLabel = document.createElement("p");
   numberLabel.setAttribute("prop", id);
   let word = num === 1 ? " Tab" : " Tabs";
-  numberLabel.innerHTML = num + word;
+  let display = num + word;
+  numberLabel.innerHTML = display;
   numberLabel.className = "number-of-tabs";
 
   let groupNameLabel = document.createElement("input");
