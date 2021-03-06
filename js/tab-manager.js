@@ -51,7 +51,11 @@ function displayGroupProperties(parent, id) {
     browser.storage.local.set({ [id]: out }).catch((err) => console.debug(err));
   });
 
+  let divider = document.createElement("div");
+  divider.className = "divider";
+
   groupTitle.appendChild(numberLabel);
+  groupTitle.appendChild(divider);
   groupTitle.appendChild(groupNameLabel);
   parent.appendChild(groupTitle);
 }

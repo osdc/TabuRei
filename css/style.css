@@ -138,7 +138,6 @@ button.add-tab {
   padding-left: 1em;
   display: block;
   line-height: 2em;
-  border-left: 2px solid #21e6c1;
 }
 
 .number-of-tabs {
@@ -147,6 +146,12 @@ button.add-tab {
   padding-left: 1em;
   width: 5em;
   font-size: 16px;
+}
+
+.tab-group .divider {
+  width: 2px;
+  margin: 6px 0;
+  background: #21e6c1;
 }
 
 li:hover {
