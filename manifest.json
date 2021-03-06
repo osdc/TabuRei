@@ -2,7 +2,7 @@
   "description": "Cross Browser Extension to manage your tabs",
   "manifest_version": 2,
   "name": "TabuRei",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "homepage_url": "https://github.com/daemon1024/TabuRei",
   "icons": {
     "48": "icons/icon-48.png"
