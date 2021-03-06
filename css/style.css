@@ -61,12 +61,6 @@ ul {
   width: 90%;
 }
 
-li {
-  display: inline-block;
-  width: 90%;
-  cursor: pointer;
-}
-
 .popup-buttons {
   display: flex;
   position: sticky;
@@ -87,12 +81,22 @@ button.popup {
   background: none;
 }
 
+.bullet-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+}
+
 button.list-item {
-  width: 3em;
-  line-height: 20px;
   color: #393e46;
   display: inline-block;
   text-align: center;
+  position: absolute;
+  left: 0px;
+  transform: translateY(-50%);
+  height: 16px;
+  width: 16px;
 }
 
 button.delete-tab {
@@ -162,22 +166,22 @@ button.add-tab {
   background: #21e6c1;
 }
 
-li:hover {
+.tab-container:hover {
   background-color: #393e46;
   font-weight: bold;
 }
 
-li:hover button.bullet {
+.tab-container:hover button.bullet {
   display: none;
   color: #de193e;
   list-style: none;
 }
 
-li:hover button.delete-tab {
+.tab-container:hover button.delete-tab {
   display: inline-block;
 }
 
-button.delete-tab:hover ~ span {
+.bullet-container:first-child:hover ~ span {
   text-decoration: line-through;
 }
 
@@ -203,14 +207,13 @@ button.delete-tab:hover ~ span {
   word-wrap: break-word;
   width: 90%;
   margin: 5px 0;
+  width: 90%;
+  cursor: pointer;
+  padding: 5px;
 }
 
 .tab-container span {
   cursor: pointer;
-}
-
-.tab-container:hover {
-  background-color: #222224;
 }
 
 /* Checkbox */

@@ -78,8 +78,12 @@ function displayGroupList() {
     list.ondrop = (e) => listonDrop(e, prop, list);
 
     store[prop].tabList.forEach((tab, i) => {
-      let tabElement = document.createElement("li");
+      let tabElement = document.createElement("div");
+      tabElement.classList.add("tab-container");
       list.title = "Click to restore this tab, Drag to drop to another group";
+
+      let buttons = document.createElement("label");
+      buttons.classList.add("bullet-container");
 
       let deleteBtn = document.createElement("button");
       deleteBtn.className = "delete-tab list-item";
@@ -87,12 +91,14 @@ function displayGroupList() {
       deleteBtn.title = "Click to delete this tab listing";
       deleteBtn.setAttribute("prop", prop);
       deleteBtn.setAttribute("index", i);
-      tabElement.appendChild(deleteBtn);
+      buttons.appendChild(deleteBtn);
 
       let bulletPoint = document.createElement("button");
       bulletPoint.className = "bullet list-item";
       bulletPoint.innerHTML = "&#x25A0";
-      tabElement.appendChild(bulletPoint);
+      buttons.appendChild(bulletPoint);
+
+      tabElement.appendChild(buttons);
 
       tabElement.setAttribute("draggable", true);
       tabElement.setAttribute("prop", prop);
@@ -171,7 +177,10 @@ document.getElementById("group-list").addEventListener("click", (e) => {
       .catch((err) => console.log(err));
   }
 
-  if ((e.target && e.target.matches("li")) || e.target.matches("span")) {
+  if (
+    (e.target && e.target.matches("div.tab-container")) ||
+    e.target.matches("span")
+  ) {
     let prop = e.target.getAttribute("prop");
     let i = Number(e.target.getAttribute("index"));
     return browser.tabs
