@@ -31,7 +31,7 @@ function displayGroupProperties(parent, id) {
   groupNameLabel.title = "Enter the name of the group here";
 
   groupNameLabel.addEventListener("keyup", function (event) {
-    if (event.keyCode === 13) {
+    if (event.key === "Enter") {
       let out = {
         groupName: groupNameLabel.value,
         tabList: store[id].tabList,
