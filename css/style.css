@@ -239,7 +239,7 @@ button.add-tab {
 .checkmark {
   position: absolute;
   left: 10px;
-  top: 5px;
+  top: 3px;
   height: 16px;
   width: 16px;
   background-color: #393e46;
