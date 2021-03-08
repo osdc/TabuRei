@@ -238,9 +238,8 @@ button.add-tab {
 /* Create a custom checkbox */
 .checkmark {
   position: absolute;
-  top: 50%;
   left: 10px;
-  transform: translateY(-50%);
+  top: 3px;
   height: 16px;
   width: 16px;
   background-color: #393e46;
