@@ -168,6 +168,13 @@ document.getElementById("group-list").addEventListener("click", (e) => {
   if (e.target && e.target.matches("button.delete-tab")) {
     let prop = e.target.getAttribute("prop");
     let i = e.target.getAttribute("index");
+    if (store[prop].tabList.length ==  1){
+      return (
+        confirm("Are you sure you want to delete this group?") &&
+        browser.storage.local.remove(prop).then(window.location.reload())
+      );
+
+    }
     store[prop].tabList.splice(i, 1);
     let out = {
       groupName: store[prop].groupName,
