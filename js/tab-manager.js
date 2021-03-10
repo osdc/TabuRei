@@ -170,7 +170,7 @@ document.getElementById("group-list").addEventListener("click", (e) => {
     let i = e.target.getAttribute("index");
     if (store[prop].tabList.length ==  1){
       return (
-        confirm("Are you sure you want to delete this group?") &&
+        confirm("Are you sure you want to delete the last element ") &&
         browser.storage.local.remove(prop).then(window.location.reload())
       );
 
