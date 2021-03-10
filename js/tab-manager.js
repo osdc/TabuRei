@@ -168,9 +168,9 @@ document.getElementById("group-list").addEventListener("click", (e) => {
   if (e.target && e.target.matches("button.delete-tab")) {
     let prop = e.target.getAttribute("prop");
     let i = e.target.getAttribute("index");
+    //deletes the group when the last element is deleted 
     if (store[prop].tabList.length ==  1){
       return (
-        confirm("Are you sure you want to delete the last element ") &&
         browser.storage.local.remove(prop).then(window.location.reload())
       );
 
