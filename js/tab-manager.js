@@ -1,15 +1,13 @@
+
 function restore(groupID) {
   store[groupID].tabList.forEach((tab) => {
     browser.tabs.create(tab.create).catch((err) => console.debug(err));
-  });
+  });;
 }
+
 function restoreToNewWindow(groupID) {
-  function onCreated(windowInfo) {
-    store[groupID].tabList.forEach((tab) => {
-      browser.tabs
-        .create({ windowId: windowInfo.id, ...tab.create })
-        .catch((err) => console.debug(err));
-    });
+  function onCreated() {
+    restore(groupID);
   }
 
   function onError(error) {
