@@ -10,7 +10,7 @@ function restoreToNewWindow(groupID) {
   }
 
   function onError(error) {
-    console.log(`Error: ${error}`);
+    console.debug(`Error: ${error}`);
   }
 
   var creating = browser.windows.create();
