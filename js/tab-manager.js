@@ -1,8 +1,7 @@
-
 function restore(groupID) {
   store[groupID].tabList.forEach((tab) => {
     browser.tabs.create(tab.create).catch((err) => console.debug(err));
-  });;
+  });
 }
 
 function restoreToNewWindow(groupID) {
