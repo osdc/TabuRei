@@ -4,6 +4,18 @@ function restore(groupID) {
   });
 }
 
+function restoreToNewWindow(groupID) {
+  function onCreated() {
+    restore(groupID);
+  }
+
+  function onError(error) {
+    console.debug(`Error: ${error}`);
+  }
+
+  var creating = browser.windows.create();
+  creating.then(onCreated, onError);
+}
 let store = {};
 
 function initialise() {
@@ -168,12 +180,9 @@ document.getElementById("group-list").addEventListener("click", (e) => {
   if (e.target && e.target.matches("button.delete-tab")) {
     let prop = e.target.getAttribute("prop");
     let i = e.target.getAttribute("index");
-    //deletes the group when the last element is deleted 
-    if (store[prop].tabList.length ==  1){
-      return (
-        browser.storage.local.remove(prop).then(window.location.reload())
-      );
-
+    //deletes the group when the last element is deleted
+    if (store[prop].tabList.length == 1) {
+      return browser.storage.local.remove(prop).then(window.location.reload());
     }
     store[prop].tabList.splice(i, 1);
     let out = {
@@ -195,6 +204,12 @@ document.getElementById("group-list").addEventListener("click", (e) => {
     return browser.tabs
       .create(store[prop].tabList[i].create)
       .catch((err) => console.debug(err));
+  }
+});
+document.getElementById("group-list").addEventListener("auxclick", (e) => {
+  if (e.target && e.target.matches("button.restore")) {
+    let prop = e.target.getAttribute("prop");
+    if (e.button == 1) return restoreToNewWindow(prop);
   }
 });
 
