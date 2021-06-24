@@ -42,7 +42,7 @@ TabuRei is an all-in-one browser extension to manage and store your tab clutter 
 
 ## Installation
 - Install via [Firefox Store](https://addons.mozilla.org/en-US/firefox/addon/taburei).
-- To be released for Chrome soon. (You can use the developer mode in the meantime)
+- To be released on the Chrome Store soon. You can follow the [Developer Setup](https://github.com/osdc/TabuRei#chrome) meanwhile to use it.
 
 ## Development Setup
 
