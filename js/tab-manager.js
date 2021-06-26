@@ -1,3 +1,5 @@
+let store = {};
+
 function restore(groupID) {
   store[groupID].tabList.forEach((tab) => {
     browser.tabs.create(tab.create).catch((err) => console.debug(err));
@@ -13,10 +15,9 @@ function restoreToNewWindow(groupID) {
     console.debug(`Error: ${error}`);
   }
 
-  var creating = browser.windows.create();
+  const creating = browser.windows.create();
   creating.then(onCreated, onError);
 }
-let store = {};
 
 function initialise() {
   return browser.storage.local.get(null).then((localStore) => {
@@ -25,17 +26,16 @@ function initialise() {
 }
 
 function displayGroupProperties(parent, id) {
-  let num = store[id].tabList.length;
-  let groupTitle = document.createElement("div");
+  const num = store[id].tabList.length;
+  const groupTitle = document.createElement("div");
   groupTitle.className = "title";
-  let numberLabel = document.createElement("p");
+  const numberLabel = document.createElement("p");
   numberLabel.setAttribute("prop", id);
-  let word = num === 1 ? " Tab" : " Tabs";
-  let display = num + word;
-  numberLabel.innerHTML = display;
+  const word = num === 1 ? " Tab" : " Tabs";
+  numberLabel.innerHTML = num + word;
   numberLabel.className = "number-of-tabs";
 
-  let groupNameLabel = document.createElement("input");
+  const groupNameLabel = document.createElement("input");
   groupNameLabel.setAttribute("prop", id);
   groupNameLabel.value = store[id].groupName;
   groupNameLabel.placeholder = "( ͡ ° ͜ʖ ͡ ° )";
@@ -44,7 +44,7 @@ function displayGroupProperties(parent, id) {
 
   groupNameLabel.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
-      let out = {
+      const out = {
         groupName: groupNameLabel.value,
         tabList: store[id].tabList,
       };
@@ -58,7 +58,7 @@ function displayGroupProperties(parent, id) {
   });
 
   groupNameLabel.addEventListener("change", () => {
-    let out = {
+    const out = {
       groupName: groupNameLabel.value,
       tabList: store[id].tabList,
     };
@@ -68,7 +68,7 @@ function displayGroupProperties(parent, id) {
       .catch((err) => console.debug(err));
   });
 
-  let divider = document.createElement("div");
+  const divider = document.createElement("div");
   divider.className = "divider";
 
   groupTitle.appendChild(numberLabel);
@@ -78,28 +78,28 @@ function displayGroupProperties(parent, id) {
 }
 
 function displayGroupList() {
-  let groupList = document.getElementById("group-list");
+  const groupList = document.getElementById("group-list");
 
-  let props = Object.keys(store).reverse();
+  const props = Object.keys(store).reverse();
   props.forEach((prop) => {
-    let groupElement = document.createElement("div");
+    const groupElement = document.createElement("div");
     groupElement.className = "tab-group";
 
     groupElement.setAttribute("prop", prop);
 
-    let list = document.createElement("ul");
+    const list = document.createElement("ul");
 
     list.ondrop = (e) => listonDrop(e, prop, list);
 
     store[prop].tabList.forEach((tab, i) => {
-      let tabElement = document.createElement("div");
+      const tabElement = document.createElement("div");
       tabElement.classList.add("tab-container");
       list.title = "Click to restore this tab, Drag to drop to another group";
 
-      let buttons = document.createElement("label");
+      const buttons = document.createElement("label");
       buttons.classList.add("bullet-container");
 
-      let deleteBtn = document.createElement("button");
+      const deleteBtn = document.createElement("button");
       deleteBtn.className = "delete-tab list-item";
       deleteBtn.innerHTML = "&#x2A09";
       deleteBtn.title = "Click to delete this tab listing";
@@ -107,7 +107,7 @@ function displayGroupList() {
       deleteBtn.setAttribute("index", i);
       buttons.appendChild(deleteBtn);
 
-      let bulletPoint = document.createElement("button");
+      const bulletPoint = document.createElement("button");
       bulletPoint.className = "bullet list-item";
       bulletPoint.innerHTML = "&#x25A0";
       buttons.appendChild(bulletPoint);
@@ -119,7 +119,7 @@ function displayGroupList() {
       tabElement.setAttribute("index", i);
       tabElement.id = tab.id;
 
-      let tabLink = document.createElement("span");
+      const tabLink = document.createElement("span");
       tabLink.setAttribute("prop", prop);
       tabLink.setAttribute("index", i);
       tabLink.appendChild(document.createTextNode(tab.title));
@@ -133,20 +133,20 @@ function displayGroupList() {
       list.appendChild(tabElement);
     });
 
-    let header = document.createElement("div");
+    const header = document.createElement("div");
     header.className = "header";
-    let groupButtons = document.createElement("div");
+    const groupButtons = document.createElement("div");
     groupButtons.className = "group-buttons";
 
     displayGroupProperties(header, prop);
 
-    let restoreBtn = document.createElement("button");
+    const restoreBtn = document.createElement("button");
     restoreBtn.className = "restore";
     restoreBtn.innerHTML = "Restore";
     restoreBtn.setAttribute("prop", prop);
     groupButtons.appendChild(restoreBtn);
 
-    let deleteBtn = document.createElement("button");
+    const deleteBtn = document.createElement("button");
     deleteBtn.className = "delete";
     deleteBtn.innerHTML = "Delete";
     deleteBtn.setAttribute("prop", prop);
@@ -164,28 +164,28 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.getElementById("group-list").addEventListener("click", (e) => {
-  if (e.target && e.target.matches("button.restore")) {
-    let prop = e.target.getAttribute("prop");
+  if (e?.target.matches("button.restore")) {
+    const prop = e.target.getAttribute("prop");
     return restore(prop);
   }
 
-  if (e.target && e.target.matches("button.delete")) {
-    let prop = e.target.getAttribute("prop");
+  if (e?.target.matches("button.delete")) {
+    const prop = e.target.getAttribute("prop");
     return (
       confirm("Are you sure you want to delete this group?") &&
       browser.storage.local.remove(prop).then(window.location.reload())
     );
   }
 
-  if (e.target && e.target.matches("button.delete-tab")) {
-    let prop = e.target.getAttribute("prop");
-    let i = e.target.getAttribute("index");
+  if (e?.target.matches("button.delete-tab")) {
+    const prop = e.target.getAttribute("prop");
+    const i = e.target.getAttribute("index");
     //deletes the group when the last element is deleted
     if (store[prop].tabList.length == 1) {
       return browser.storage.local.remove(prop).then(window.location.reload());
     }
     store[prop].tabList.splice(i, 1);
-    let out = {
+    const out = {
       groupName: store[prop].groupName,
       tabList: store[prop].tabList,
     };
@@ -195,20 +195,17 @@ document.getElementById("group-list").addEventListener("click", (e) => {
       .catch((err) => console.log(err));
   }
 
-  if (
-    (e.target && e.target.matches("div.tab-container")) ||
-    e.target.matches("span")
-  ) {
-    let prop = e.target.getAttribute("prop");
-    let i = Number(e.target.getAttribute("index"));
+  if (e?.target.matches("div.tab-container") || e?.target.matches("span")) {
+    const prop = e.target.getAttribute("prop");
+    const i = Number(e.target.getAttribute("index"));
     return browser.tabs
       .create(store[prop].tabList[i].create)
       .catch((err) => console.debug(err));
   }
 });
 document.getElementById("group-list").addEventListener("auxclick", (e) => {
-  if (e.target && e.target.matches("button.restore")) {
-    let prop = e.target.getAttribute("prop");
+  if (e?.target.matches("button.restore")) {
+    const prop = e.target.getAttribute("prop");
     if (e.button == 1) return restoreToNewWindow(prop);
   }
 });
@@ -232,7 +229,7 @@ function listonDrop(e, prop, list) {
     updatedTabList.push(originalTabList[index]);
     originalTabList.splice(index, 1);
     if (originalTabList.length === 0) {
-      let out = {
+      const out = {
         groupName: store[prop].groupName,
         tabList: updatedTabList,
       };
@@ -245,11 +242,11 @@ function listonDrop(e, prop, list) {
         .then(window.location.reload());
     }
 
-    let originalOut = {
+    const originalOut = {
       groupName: store[elementProp].groupName,
       tabList: originalTabList,
     };
-    let updatedOut = {
+    const updatedOut = {
       groupName: store[prop].groupName,
       tabList: updatedTabList,
     };
