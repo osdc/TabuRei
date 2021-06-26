@@ -11,25 +11,30 @@ function isValidTab(tab) {
 
 function listTabs() {
   getCurrentWindowTabs().then((tabs) => {
-    let tabsList = document.getElementById("tabs-list");
-    let currentTabs = document.createDocumentFragment();
-    for (let tab of tabs) {
+    const tabsList = document.getElementById("tabs-list");
+    const currentTabs = document.createDocumentFragment();
+    for (const tab of tabs) {
       if (!tab.url.startsWith("about:")) {
         const tabContainer = document.createElement("div");
         tabContainer.classList.add("tab-container");
-        let tabElement = document.createElement("label");
+        tabContainer.setAttribute("tab-id", tab.id);
+
+        const tabElement = document.createElement("label");
         tabElement.classList.add("popup-element-container");
-        let tabTitle = document.createElement("span");
+
+        const tabTitle = document.createElement("span");
         tabTitle.innerText = tab.title;
         tabTitle.addEventListener("click", activateTab);
-        tabContainer.setAttribute("tab-id", tab.id);
-        let checkbox = document.createElement("input");
+
+        const checkbox = document.createElement("input");
         checkbox.setAttribute("type", "checkbox");
         checkbox.addEventListener("click", removeTab);
         tabElement.appendChild(checkbox);
-        let checkmark = document.createElement("span");
+
+        const checkmark = document.createElement("span");
         checkmark.classList.add("checkmark");
         tabElement.appendChild(checkmark);
+
         tabContainer.appendChild(tabElement);
         tabContainer.appendChild(tabTitle);
         currentTabs.appendChild(tabContainer);
@@ -45,7 +50,7 @@ function storeTabs(tabs, blacklistedTabs) {
     (tab) => isValidTab(tab) && !blacklistedTabs.includes(tab.id)
   );
 
-  let allowedProperties = [
+  const allowedProperties = [
     "url",
     "cookieStoreId",
     "openInReaderMode",
@@ -66,14 +71,14 @@ function storeTabs(tabs, blacklistedTabs) {
     };
   });
 
-  let groupId = performance.timeOrigin + performance.now();
+  const groupId = performance.timeOrigin + performance.now();
 
-  let groupInfo = {
+  const groupInfo = {
     groupName: "",
     tabList: storedTabs,
   };
 
-  let store = {
+  const store = {
     [groupId]: groupInfo,
   };
 
@@ -82,18 +87,18 @@ function storeTabs(tabs, blacklistedTabs) {
 
 function onBtnClick(blackedlistedArray) {
   getCurrentWindowTabs().then((tabs) => {
-    let storing = storeTabs(tabs, blackedlistedArray);
+    const storing = storeTabs(tabs, blackedlistedArray);
     Promise.resolve(storing);
 
-    let creating = browser.tabs.create({
+    const creating = browser.tabs.create({
       url: "index.html",
     });
 
     Promise.resolve(creating);
 
-    for (let tab of tabs) {
+    for (const tab of tabs) {
       if (!blackedlistedArray.includes(tab.id)) {
-        let removing = browser.tabs.remove(tab.id);
+        const removing = browser.tabs.remove(tab.id);
         Promise.resolve(removing);
       }
     }
@@ -111,7 +116,7 @@ document
   .addEventListener("click", () => onBtnClick(blacklist));
 
 document.getElementById("tab-manager").addEventListener("click", function () {
-  let creating = browser.tabs.create({
+  const creating = browser.tabs.create({
     url: "index.html",
   });
   Promise.resolve(creating);
