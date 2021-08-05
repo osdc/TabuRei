@@ -22,7 +22,6 @@ function restoreToNewWindow(groupID) {
 function initialise() {
   return browser.storage.local.get(null).then((localStore) => {
     store = localStore;
-    console.log(store);
   });
 }
 
