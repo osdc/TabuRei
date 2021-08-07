@@ -1,18 +1,21 @@
-function initialise() {
+function exportTabs() {
   return browser.storage.local.get(null).then((localStore) => {
     store = localStore;
+
     const props = Object.keys(store).reverse();
 
-    // console.log(store[props[0]]["tabList"][0]);
+    let textArea = document.getElementById("export-form");
 
     for (let i = 0; i < props.length; i++) {
-      // console.log(store[props[i]]["tabList"]);
-      let listOfTabs = store[props[i]]['tabList'];
-      for (let j = 0; j < listOfTabs.length; j++)
-        console.log(listOfTabs[j].url);
-      console.log('\n');
+      let listOfTabs = store[props[i]]["tabList"];
+
+      for (let j = 0; j < listOfTabs.length; j++) {
+        textArea.value +=
+          listOfTabs[j].url + " | " + listOfTabs[j].title + "\n";
+      }
+      textArea.value += "\n";
     }
   });
 }
 
-initialise();
+exportTabs();
