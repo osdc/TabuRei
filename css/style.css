@@ -270,3 +270,13 @@ button.add-tab {
   content: "\2A09";
   color: #de193e;
 }
+
+/* Styling for Export Page */
+textarea {
+  resize: none;
+  outline: none;
+  border: 4px solid #393e46;
+  background-color: #232931;
+  color: #eeeeee;
+  padding: 12px;
+}
