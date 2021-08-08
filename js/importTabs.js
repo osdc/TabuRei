@@ -1,6 +1,6 @@
 document.getElementById("elem").addEventListener("click" , getelement);
 
-function getelement(){
+async function getelement(){
         let s = document.getElementById("importform").value;
         //differetiating into groups
         let groups = s.split("\n\n")
@@ -16,9 +16,10 @@ function getelement(){
                 grouplist.push({url:temp[0], title:temp[1]})
                 };       
                 console.log(grouplist);
-                storeTabs(grouplist, [])
+                await storeTabs(grouplist, [])
         };
-
+        // Redirect to index after storing
+        location.href = "index.html";
 }
 
 function storeTabs(tabs) {
