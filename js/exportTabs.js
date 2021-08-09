@@ -17,10 +17,5 @@ function exportTabs() {
     }
   });
 }
-const textArea=document.querySelector('.text-area');
-const copyText=document.querySelector('.copy-text');
-copyText.addEventListener('click', ()=>{
-    textArea.select();
-    document.execCommand('copy');
-});
+
 exportTabs();
