@@ -84,11 +84,12 @@ function displayGroupList() {
   props.forEach((prop) => {
     const groupElement = document.createElement("div");
     groupElement.className = "tab-group";
+    groupElement.id="TabGroup";
 
     groupElement.setAttribute("prop", prop);
 
-    let list = document.createElement("ul");
-    list.id="collapsible";
+    const list = document.createElement("ul");
+    list.id = "collapsible";
 
     list.ondrop = (e) => listonDrop(e, prop, list);
 
@@ -153,14 +154,13 @@ function displayGroupList() {
     deleteBtn.setAttribute("prop", prop);
     groupButtons.appendChild(deleteBtn);
 
-    let expandBtn = document.createElement("button");
+    const expandBtn = document.createElement("button");
     expandBtn.className = "expand";
-    expandBtn.innerHTML = "Expand";
+    expandBtn.id = "expand";
+    expandBtn.innerHTML = "⯆";
     expandBtn.setAttribute("prop", prop);
+
     groupButtons.appendChild(expandBtn);
-    
-
-
     groupElement.appendChild(header);
     header.appendChild(groupButtons);
     groupElement.appendChild(list);
@@ -176,25 +176,28 @@ document.getElementById("group-list").addEventListener("click", (e) => {
   if (e?.target.matches("button.restore")) {
     const prop = e.target.getAttribute("prop");
     return restore(prop);
-  } if (e.target && e.target.matches("button.delete")) {
-    let prop = e.target.getAttribute("prop");
+  }
+  if (e?.target.matches("button.delete")) {
+    const prop = e.target.getAttribute("prop");
     return (
       confirm("Are you sure you want to delete this group?") &&
       browser.storage.local.remove(prop).then(window.location.reload())
     );
   }
-  
-    if (e.target && e.target.matches("button.expand")) {
-      console.log("working");
-     var content = document.getElementById("collapsible");
-    if (content.style.display === "block") {
-      content.style.display = "none";
+
+  if (e?.target.matches("button.expand")) {
+    const content = document.getElementById("collapsible");
+    const tabGroup = document.getElementById("TabGroup")
+    if (content.style.maxHeight) {
+      document.getElementById("expand").innerHTML = "⯆";
+      content.style.maxHeight = null;
+      content.style.margin = 0;
     } else {
-      content.style.display = "block";
+      content.style.maxHeight = content.scrollHeight + "px";
+      document.getElementById("expand").innerHTML = "⯅";
+      content.style.margin = 16 + "px";
     }
   }
-
-
 
   if (e?.target.matches("button.delete-tab")) {
     const prop = e.target.getAttribute("prop");
