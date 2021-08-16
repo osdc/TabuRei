@@ -152,6 +152,14 @@ button.add-tab {
   line-height: 2em;
 }
 
+@media (max-width:650px) {
+  .header{
+    flex-direction: column;
+  }
+  .group-buttons{
+    flex-direction: none;
+  }
+}
 .number-of-tabs {
   font-weight: bold;
   color: #21e6c1;
