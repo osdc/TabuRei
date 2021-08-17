@@ -152,20 +152,23 @@ button.add-tab {
   line-height: 2em;
 }
 
-@media (max-width:650px) {
-  .header{
-    flex-direction: column;
-  }
-  .group-buttons{
-    flex-direction: none;
-  }
-}
+
 .number-of-tabs {
   font-weight: bold;
   color: #21e6c1;
   padding-left: 1em;
   width: 5em;
   font-size: 16px;
+}
+
+@media (max-width:650px) {
+  .header{
+    flex-direction: column;
+  }
+  .number-of-tabs{
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+  }
 }
 
 .tab-group .divider {
