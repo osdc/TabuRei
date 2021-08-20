@@ -283,7 +283,7 @@ textarea {
   padding: 12px;
 }
 
-@media (max-width:650px) {
+@media (max-width:648px) {
   .header{
     flex-direction: column;
   }
