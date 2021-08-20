@@ -152,6 +152,7 @@ button.add-tab {
   line-height: 2em;
 }
 
+
 .number-of-tabs {
   font-weight: bold;
   color: #21e6c1;
@@ -159,6 +160,7 @@ button.add-tab {
   width: 5em;
   font-size: 16px;
 }
+
 
 .tab-group .divider {
   width: 2px;
@@ -279,4 +281,14 @@ textarea {
   background-color: #232931;
   color: #eeeeee;
   padding: 12px;
+}
+
+@media (max-width:648px) {
+  .header{
+    flex-direction: column;
+  }
+  .number-of-tabs{
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+  }
 }
