@@ -113,10 +113,26 @@ button.bullet {
   background: none;
 }
 
+div.add-tab {
+  padding-bottom: 8px;
+  height: 20px;
+}
+
 button.add-tab {
   background: none;
   color: #21e6c1;
   border: none;
+  padding-left: 0.90em;
+  padding-right: 5px;
+}
+
+#add-tab-input {
+  display: none;
+  background: none;
+  border: 2px solid #393e46;
+  color: #eeeeee;;
+  width: 70%;
+  height: 100%;
 }
 
 .tab-group {
@@ -152,7 +168,6 @@ button.add-tab {
   line-height: 2em;
 }
 
-
 .number-of-tabs {
   font-weight: bold;
   color: #21e6c1;
@@ -160,7 +175,6 @@ button.add-tab {
   width: 5em;
   font-size: 16px;
 }
-
 
 .tab-group .divider {
   width: 2px;
