@@ -20,7 +20,8 @@ function restoreToNewWindow(groupID) {
 }
 
 function addTabManually(groupID) {
-  addTabInput = document.getElementById("add-tab-input");
+  const addTabInput = document.getElementsByClassName(
+    "add-tab-input" + " prop-" + groupID.toString())[0];
   addTabInput.style.display = "inline-block";
   addTabInput.focus();
 
@@ -28,15 +29,15 @@ function addTabManually(groupID) {
     addTabInput.value = "";
     addTabInput.style.display = "none";
     let title = url;
-    let currentTabList = store[groupID].tabList
+    let currentTabList = store[groupID].tabList;
 
     try {
       // getting title of the page, also checks if the URL is valid
       const response = await fetch(
         url,
         { mode: 'cors', headers: { 'Access-Control-Allow-Origin': '*' } }
-      )
-      const html = await response.text()
+      );
+      const html = await response.text();
       const doc = new DOMParser().parseFromString(html, "text/html");
       title = doc.querySelectorAll('title')[0].innerText;
     }
@@ -47,7 +48,7 @@ function addTabManually(groupID) {
       else {
         alert("Invalid URL. Please enter a valid URL.");
         console.debug(error);
-        return false
+        return;
       }
     }
 
@@ -68,7 +69,7 @@ function addTabManually(groupID) {
       .then(() => {
         window.location.reload();
         addTabInput.style.display = "none";
-        return true;
+        return;
       })
       .catch((err) => console.debug(err));
   };
@@ -76,24 +77,26 @@ function addTabManually(groupID) {
   addTabInput.addEventListener("keyup", function(event) {
     if (event.key === "Enter") {
       url = addTabInput.value;
-      if (url !== "") {
+      if (url.trim() !== "") {
         return createTab(url);
       }
       else {
         addTabInput.style.display = "none";
-        return false
+        addTabInput.value = "";
+        return;
       }
     }
   });
 
   addTabInput.addEventListener("focusout", () => {
     url = addTabInput.value;
-    if (url !== "") {
+    if (url.trim() !== "") {
       return createTab(url);
     }
     else {
       addTabInput.style.display = "none";
-      return false
+      addTabInput.value = "";
+      return;
     }
   });
 
@@ -225,7 +228,7 @@ function displayGroupList() {
     addTab.appendChild(addTabBtn);
     const addTabInput = document.createElement("input");
     addTabInput.setAttribute('type', 'text');
-    addTabInput.id = "add-tab-input";
+    addTabInput.className = "add-tab-input" + " prop-" + prop.toString();
     addTabInput.setAttribute("placeholder", "Enter URL of the tab to add");
     addTab.appendChild(addTabInput);
     list.appendChild(addTab);

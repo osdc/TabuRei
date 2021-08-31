@@ -126,7 +126,7 @@ button.add-tab {
   padding-right: 5px;
 }
 
-#add-tab-input {
+.add-tab-input {
   display: none;
   background: none;
   border: 2px solid #393e46;
