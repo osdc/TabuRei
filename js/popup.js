@@ -115,7 +115,7 @@ document
   .getElementById("collapse-unselected")
   .addEventListener("click", () => onBtnClick(blacklist));
 
-document.getElementById("tab-manager").addEventListener("click", function () {
+document.getElementById("tab-manager").addEventListener("click", function() {
   const creating = browser.tabs.create({
     url: "index.html",
   });
