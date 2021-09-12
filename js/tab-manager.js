@@ -89,7 +89,7 @@ function displayGroupList() {
     groupElement.setAttribute("prop", prop);
 
     const list = document.createElement("ul");
-    list.id = "collapsible";
+    list.className = "collapsible";
 
     list.ondrop = (e) => listonDrop(e, prop, list);
 
@@ -186,8 +186,10 @@ document.getElementById("group-list").addEventListener("click", (e) => {
   }
 
   if (e?.target.matches("button.expand")) {
-    const content = document.getElementById("collapsible");
-    const tabGroup = document.getElementById("TabGroup")
+    const content1 = document.getElementsByClassName("header");
+    let contentArray = Array.from(content1);
+    for(let i=0;i<contentArray.length;i++){
+       let content =contentArray[i].nextElementSibling;
     if (content.style.maxHeight) {
       document.getElementById("expand").innerHTML = "⯆";
       content.style.maxHeight = null;
@@ -196,7 +198,7 @@ document.getElementById("group-list").addEventListener("click", (e) => {
       content.style.maxHeight = content.scrollHeight + "px";
       document.getElementById("expand").innerHTML = "⯅";
       content.style.margin = 16 + "px";
-    }
+    } }
   }
 
   if (e?.target.matches("button.delete-tab")) {
