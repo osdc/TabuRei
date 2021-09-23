@@ -116,6 +116,7 @@ button.delete-tab {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 }
 
 #group-list h2{
