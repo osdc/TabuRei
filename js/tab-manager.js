@@ -162,9 +162,15 @@ function displayGroupProperties(parent, id) {
 
 function displayGroupList() {
   const groupList = document.getElementById("group-list");
-
+  const welcomeTitle = document.querySelector("#group-list h2");
+  let flag = true;
   const props = Object.keys(store).reverse();
   props.forEach((prop) => {
+    if(flag)
+    {
+      groupList.removeChild(welcomeTitle);
+      flag=false;
+    }
     const groupElement = document.createElement("div");
     groupElement.className = "tab-group";
 
@@ -224,7 +230,7 @@ function displayGroupList() {
     addTabBtn.className = "add-tab";
     addTabBtn.innerHTML = "&#65291";
     addTabBtn.setAttribute("prop", prop);
-    addTabBtn.title = "Click to add a new tab to this group (by URL)"
+    addTabBtn.title = "Click to add a new tab to this group (by URL)";
     addTab.appendChild(addTabBtn);
     const addTabInput = document.createElement("input");
     addTabInput.setAttribute('type', 'text');
