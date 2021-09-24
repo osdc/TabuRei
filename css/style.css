@@ -109,14 +109,10 @@ button.delete-tab {
 
 #group-list{
   min-height: 500px;
-  height: max-content;
-  width: 1000px;
   border: 5px solid #393e46;
+  width: 1000px;
   margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
+  position: relative; 
 }
 
 #group-list h2{
@@ -156,8 +152,8 @@ button.add-tab {
 }
 
 .tab-group {
-  border-bottom:4px solid #393e46;
-  /* margin-bottom: 1em; */
+  border:4px solid #393e46;
+  margin-bottom: 1em;
   padding: 0.5em;
 }
 

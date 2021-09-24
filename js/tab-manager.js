@@ -166,9 +166,12 @@ function displayGroupList() {
   let flag = true;
   const props = Object.keys(store).reverse();
   props.forEach((prop) => {
+
+    // condition to remove empty box with rendering tabs
     if(flag)
     {
       groupList.removeChild(welcomeTitle);
+      groupList.setAttribute('style', 'min-height: 0  ; border:none; margin-bottom: 0;')
       flag=false;
     }
     const groupElement = document.createElement("div");
