@@ -107,6 +107,22 @@ button.delete-tab {
   background: none;
 }
 
+#group-list{
+  min-height: 500px;
+  border: 5px solid #393e46;
+  width: 1000px;
+  margin-bottom: 10px;
+  position: relative; 
+}
+
+#group-list h2{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  margin: 0;
+}
+
 button.bullet {
   border: none;
   text-decoration: none;
@@ -136,10 +152,11 @@ button.add-tab {
 }
 
 .tab-group {
-  border: 4px solid #393e46;
+  border:4px solid #393e46;
   margin-bottom: 1em;
   padding: 0.5em;
 }
+
 
 .tab-group .header {
   display: flex;
@@ -231,6 +248,8 @@ button.add-tab {
 .tab-container span {
   cursor: pointer;
 }
+
+
 
 /* Checkbox */
 
