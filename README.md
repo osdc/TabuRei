@@ -7,6 +7,7 @@
   [![Mozilla Add-on](https://img.shields.io/amo/v/taburei?color=21e6c1&style=flat-square)](https://addons.mozilla.org/en-US/firefox/addon/taburei)
   [![GitHub](https://img.shields.io/github/license/daemon1024/taburei?color=393e46&style=flat-square)](https://addons.mozilla.org/en-US/firefox/addon/taburei)
   [![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%99%A5-de193e?style=flat-square&logo=open-source-initiative)](https://github.com/osdc)
+  [![Discord](https://img.shields.io/discord/357949642266116108?color=5E21E6&logo=discord&logoColor=white&style=flat-square)](https://discord.gg/asdUYZmmZj)
 
   Kill the tab clutter: Cross Browser Extension to manage your tabs
   
