@@ -19,7 +19,7 @@ git clone https://github.com/YOUR-GITHUB-USERNAME/TabuRei
 
 ## Setting up
 
-* Having cloned the copy to your local machine, enter into the `TabuRei` directory using the `cd` command.
+* Having [cloned](#fork-and-clone-this-repository) the copy to your local machine, enter into the `TabuRei` directory using the `cd` command.
 ```
 cd TabuRei
 ```
@@ -28,6 +28,45 @@ cd TabuRei
 ```
 ls
 ```
+
+You can choose to execute things in 2 ways:
+- [Manual Setup](#manual-setup)
+- [`web-ext` tool](#web-ext)
+
+### Manual Setup
+
+#### Firefox
+
+- Head to `about:debugging`.
+- Click on `This Firefox` on top left.
+- Click on **`Load Temporary Add-on`**
+- Select `manifest.json` file in the extension's directory.
+
+#### Chrome
+
+- Head to `chrome://extensions`.
+- Enable `Developer Mode` on the top-right.
+- Click on **`Load Unpacked`**.
+- Select the extension's directory or any file inside it.
+
+### `web-ext`
+
+web-ext is a command line tool designed to speed up various parts of the extension development process, making development faster and easier. 
+**Installation**
+```
+npm install --global web-ext
+```
+Requires [`node.js`](https://nodejs.org/) install
+
+Simply execute 
+```
+web-ext run
+```
+This will load your extension into a test web browser and then you can experiment with your changes.
+
+To know more about `web-ext`, Checkout:
+- [Getting started with web-ext](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/)
+- [`web-ext` command reference](https://extensionworkshop.com/documentation/develop/web-ext-command-reference/)
 
 ## Making Pull-Requests (Contributions)
 
@@ -65,4 +104,9 @@ git push -u origin "Name-of-the-branch-from-step-1"
 
 * [Eloquent Javascript](https://eloquentjavascript.net/)
 * [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
+### Extension Development
+* [What are extensions?](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/What_are_WebExtensions)
+* [MDN WebExtensions](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions)
+* [JavaScript API Reference](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API)
 
