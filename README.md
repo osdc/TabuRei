@@ -47,19 +47,4 @@ TabuRei is an all-in-one browser extension to manage and store your tab clutter 
 
 ## Development Setup
 
-1. Clone the repository.
-2. Follow the setup according to your browser:
-
-#### Firefox
-
-- Head to `about:debugging`.
-- Click on `This Firefox` on top left.
-- Click on **`Load Temporary Add-on`**
-- Select `manifest.json` file in the extension's directory.
-
-#### Chrome
-
-- Head to `chrome://extensions`.
-- Enable `Developer Mode` on the top-right.
-- Click on **`Load Unpacked`**.
-- Select the extension's directory or any file inside it.
+Find the detailed Development Setup Guide [here](CONTRIBUTING.md#setting-up)
