@@ -176,10 +176,12 @@ function displayGroupList() {
     }
     const groupElement = document.createElement("div");
     groupElement.className = "tab-group";
+    groupElement.id="TabGroup";
 
     groupElement.setAttribute("prop", prop);
 
     const list = document.createElement("ul");
+    list.className = "collapsible";
 
     list.ondrop = (e) => listonDrop(e, prop, list);
 
@@ -261,6 +263,13 @@ function displayGroupList() {
     deleteBtn.setAttribute("prop", prop);
     groupButtons.appendChild(deleteBtn);
 
+    const expandBtn = document.createElement("button");
+    expandBtn.className = "expand";
+    expandBtn.id = "expand";
+    expandBtn.innerHTML = "⯆";
+    expandBtn.setAttribute("prop", prop);
+
+    groupButtons.appendChild(expandBtn);
     groupElement.appendChild(header);
     header.appendChild(groupButtons);
     groupElement.appendChild(list);
@@ -277,13 +286,28 @@ document.getElementById("group-list").addEventListener("click", (e) => {
     const prop = e.target.getAttribute("prop");
     return restore(prop);
   }
-
   if (e?.target.matches("button.delete")) {
     const prop = e.target.getAttribute("prop");
     return (
       confirm("Are you sure you want to delete this group?") &&
       browser.storage.local.remove(prop).then(window.location.reload())
     );
+  }
+
+  if (e?.target.matches("button.expand")) {
+    const content1 = document.getElementsByClassName("header");
+    let contentArray = Array.from(content1);
+    for(let i=0;i<contentArray.length;i++){
+       let content =contentArray[i].nextElementSibling;
+    if (content.style.maxHeight) {
+      document.getElementById("expand").innerHTML = "⯆";
+      content.style.maxHeight = null;
+      content.style.margin = 0;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+      document.getElementById("expand").innerHTML = "⯅";
+      content.style.margin = 16 + "px";
+    } }
   }
 
   if (e?.target.matches("button.delete-tab")) {

@@ -54,11 +54,20 @@ button.restore {
   background-color: #21e6c1;
   color: #121212;
 }
+button.expand {
+  -webkit-filter: invert(100%); /* Safari/Chrome */
+  filter: invert(100%);
+  background-color:#dcd6ce;
+  border: none;
+}
 
 ul {
   list-style: none;
   align-self: center;
   width: 90%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
 }
 
 .popup-buttons {
