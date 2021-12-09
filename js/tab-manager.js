@@ -179,15 +179,15 @@ function displayGroupList() {
 
     groupElement.setAttribute("prop", prop);
 
-    const list = document.createElement("ul");
+    const tabContainer = document.createElement("div");
 
-    list.ondrop = (e) => listonDrop(e, prop, list);
+    tabContainer.ondrop = (e) => listonDrop(e, prop, tabContainer);
 
     // Creating elements for each item of a group
     store[prop].tabList.forEach((tab, i) => {
       const tabElement = document.createElement("div");
       tabElement.classList.add("tab-container");
-      list.title = "Click to restore this tab, Drag to drop to another group";
+      tabContainer.title = "Click to restore this tab, Drag to drop to another group";
 
       const buttons = document.createElement("label");
       buttons.classList.add("bullet-container");
@@ -223,7 +223,7 @@ function displayGroupList() {
       });
       tabElement.addEventListener("dragover", (e) => e.preventDefault());
 
-      list.appendChild(tabElement);
+      tabContainer.appendChild(tabElement);
     });
 
     // Elements for adding tab manually
@@ -240,7 +240,7 @@ function displayGroupList() {
     addTabInput.className = "add-tab-input" + " prop-" + prop.toString();
     addTabInput.setAttribute("placeholder", "Enter URL of the tab to add");
     addTab.appendChild(addTabInput);
-    list.appendChild(addTab);
+    tabContainer.appendChild(addTab);
 
     const header = document.createElement("div");
     header.className = "header";
@@ -263,7 +263,7 @@ function displayGroupList() {
 
     groupElement.appendChild(header);
     header.appendChild(groupButtons);
-    groupElement.appendChild(list);
+    groupElement.appendChild(tabContainer);
     groupList.appendChild(groupElement);
   });
 }
@@ -331,11 +331,11 @@ document.getElementById("clear-storage-btn").addEventListener("click", () => {
     browser.storage.local.clear().then(window.location.reload());
 });
 
-function listonDrop(e, prop, list) {
+function listonDrop(e, prop, tabContainer) {
   e.preventDefault();
   const data = e.dataTransfer.getData("element-data");
   const element = document.getElementById(data);
-  list.appendChild(element);
+  tabContainer.appendChild(element);
   const elementProp = element.getAttribute("prop");
   const index = element.getAttribute("index");
   const originalTabList = store[elementProp].tabList;
