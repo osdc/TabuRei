@@ -58,5 +58,5 @@ Find the detailed Development Setup Guide [here](CONTRIBUTING.md#setting-up)
 </p>
  <p float="left">
   <img src="/Screenshots/export_tabs.jpg" width="40%" />
-  <img src="/Screenshots/Imports_tabs.jpg" width="40%" /> 
+  <img src="/Screenshots/import_tabs.jpg" width="40%" /> 
 </p>
