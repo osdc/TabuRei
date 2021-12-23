@@ -48,3 +48,14 @@ TabuRei is an all-in-one browser extension to manage and store your tab clutter 
 ## Development Setup
 
 Find the detailed Development Setup Guide [here](CONTRIBUTING.md#setting-up)
+
+## Screenshots
+
+<p float="left">
+  <img src="/Screenshots/current_tabs.jpg" width="40%" />
+  <img src="/Screenshots/collapse_tabs.jpg" width="40%" /> 
+</p>
+ <p float="left">
+  <img src="/Screenshots/export_tabs.jpg" width="40%" />
+  <img src="/Screenshots/import_tabs.jpg" width="40%" /> 
+</p>
