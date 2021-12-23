@@ -9,8 +9,10 @@ async function getelement() {
     //differentiating into
     var group = groups[i].split("\n");
     var grouplength = group.length;
+    if(group[grouplength-1]==="")
+    group.pop()
     var grouplist = [];
-    for (j = 0; j < grouplength; j++) {
+    for (j = 0; j < group.length; j++) {
       var temp = group[j].split("|");
       grouplist.push({ url: temp[0], title: temp[1] });
     }
