@@ -52,8 +52,9 @@ Find the detailed Development Setup Guide [here](CONTRIBUTING.md#setting-up)
 
 ## Screenshots
 
-<img align="left" width="75%" style="margin-bottom:10px" src="/Screenshots/collapse_tabs.jpg">
-<img align="left" width="50%" src="/Screenshots/collapse_tabs.jpg">
 <img align="left" width="50%" src="/Screenshots/current_tabs.jpg">
+<img align="right" width="50%" src="/Screenshots/collapse_tabs.jpg">
+<br>
 <img align="left" width="50%" src="/Screenshots/export_tabs.jpg">
+<img align="right" width="50%" src="/Screenshots/import_tabs.jpg">
 
