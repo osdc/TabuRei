@@ -13,25 +13,16 @@
   
     <div class="container">
       
-      <!-- <h1 class="heading">TabuRei</h1>
-      <p style="text-align: right">
-        <a href="import.html" ><button id="import">Import Tabs</button></a>
-        <a href="export.html"><button id="">Export Tabs</button></a>
-      </p> -->
+      <div id="wrapper">
+        <div class="content"></div>
+        <div class="content"><h1 class="heading">TabuRei</h1></div>
+        <div class="content">
+          <a href="import.html" ><button id="import">Import Tabs</button></a>
+          <a href="export.html"><button id="">Export Tabs</button></a>
+        </div>
+      </div>
 
-      <table>
-        <tr>
-          <td>
-            <h1 class="heading" id="td_taburei">TabuRei</h1>
-          </td>
-          <td class="imp_exp">
-            <a href="import.html" ><button id="import">Import Tabs</button></a>
-            <a href="export.html"><button id="">Export Tabs</button></a>
-          </td>
-        </tr>
-      </table>
-
-      <div id="group-list">
+      <div id="group-list" style="">
         <h2>Save some tabs already!</h2>
       </div>
       
@@ -42,7 +33,7 @@
         <label id="warning" for="delete">* Warning: This will clear all tabs </label>
       </div>
 
-    </div>  <!--container div closed-->
+    </div>
 
     <!-- This polyfill allows the Promise-based WebExtension API to run on Chrome and derivatives.   -->
     <script src="polyfill/browser-polyfill.min.js"></script>

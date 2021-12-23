@@ -26,28 +26,22 @@ a {
 }
 
 .heading {
-  text-decoration-color: red;
   color: #21e6c1;
   font-size: 2.5em;
   font-weight: bold;
   text-align: center; 
 }
 
-table {
+#wrapper {
   max-width: 1000px;
   min-width: 1000px;
 }
 
-#td_taburei {
-  text-align: right; 
-  /* this will override align centre 
-     property of class heading */
-}
-
-.imp_exp {
+.content {
+  display: inline-block;
+  margin-left: -4px;
+  width: 33%;
   text-align: right;
-  vertical-align: middle;
-  max-width:110px;
 }
 
 button {
@@ -62,7 +56,6 @@ button {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius:3px;
 }
 
 button:hover {
@@ -150,7 +143,6 @@ button.delete-tab {
 #group-list{
   min-height: 500px;
   border: 5px solid #393e46;
-  border-radius:10px;
   width: 1000px;
   margin-bottom: 10px;
   position: relative; 
@@ -355,7 +347,6 @@ textarea {
   background-color: #232931;
   color: #eeeeee;
   padding: 12px;
-  border-radius:10px;
 }
 
 @media (max-width:648px) {
