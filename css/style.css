@@ -26,10 +26,28 @@ a {
 }
 
 .heading {
+  text-decoration-color: red;
   color: #21e6c1;
   font-size: 2.5em;
   font-weight: bold;
-  text-align: center;
+  text-align: center; 
+}
+
+table {
+  max-width: 1000px;
+  min-width: 1000px;
+}
+
+#td_taburei {
+  text-align: right; 
+  /* this will override align centre 
+     property of class heading */
+}
+
+.imp_exp {
+  text-align: right;
+  vertical-align: middle;
+  max-width:110px;
 }
 
 button {
@@ -37,22 +55,44 @@ button {
   font-weight: bolder;
   color: #121212;
   border-color: #121212;
-  padding: 5px 10px;
+  padding: 5px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+  border-radius:3px;
+}
+
+button:hover {
+  border: 2px solid #21e6c1;
+  background-color: inherit;
+  color: #21e6c1;
+  transition: 0.1s ease-in-out;
 }
 
 button.delete {
   background-color: #de193e;
+  color:#DFF0D8;
+  border: 2px solid #de193e;
+}
+
+.delete:hover {
+  background-color: inherit;
+  border: 2px solid #de193e;
 }
 
 button.restore {
   background-color: #21e6c1;
   color: #121212;
+}
+
+#warning {
+  font-family:'Courier New', Courier, monospace;
+  color: #DFF0D8;
+  float: right;
+  padding: 10px 15px;
 }
 
 ul {
@@ -110,6 +150,7 @@ button.delete-tab {
 #group-list{
   min-height: 500px;
   border: 5px solid #393e46;
+  border-radius:10px;
   width: 1000px;
   margin-bottom: 10px;
   position: relative; 
@@ -314,6 +355,7 @@ textarea {
   background-color: #232931;
   color: #eeeeee;
   padding: 12px;
+  border-radius:10px;
 }
 
 @media (max-width:648px) {
