@@ -49,6 +49,7 @@ TabuRei is an all-in-one browser extension to manage and store your tab clutter 
 
 Find the detailed Development Setup Guide [here](CONTRIBUTING.md#setting-up)
 
+<<<<<<< HEAD
 
 ## Live Demo
 
