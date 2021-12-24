@@ -81,6 +81,13 @@ button.restore {
   color: #121212;
 }
 
+button.restore:hover {
+  border: 2px solid #21e6c1;
+  background-color: inherit;
+  color: #21e6c1;
+  transition: 0.1s ease-in-out;
+}
+
 #warning {
   font-family:'Courier New', Courier, monospace;
   color: #DFF0D8;
